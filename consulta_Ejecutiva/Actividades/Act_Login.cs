@@ -7,7 +7,7 @@ using Android.Widget;
 namespace consulta_Ejecutiva
 {
     [Activity(Label = "LOGIN", Theme = "@style/AppTheme"
-        , MainLauncher = true
+        //, MainLauncher = true
         )]
     public class Act_Login : AppCompatActivity
     {

@@ -2,29 +2,46 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"  
     android:layout_width="match_parent"  
     android:layout_height="match_parent">  
-  <LinearLayout  
+  
+	<LinearLayout  
       android:orientation="vertical"  
       android:layout_width="match_parent"  
       android:layout_height="wrap_content">  
-    <microcharts.droid.ChartView  
+
+		<microcharts.droid.ChartView  
         android:id="@+id/chartView"  
         android:layout_width="match_parent"  
-        android:layout_height="160dp" />  
-    <microcharts.droid.ChartView   
+        android:layout_height="160dp"
+	
+		/>  
+
+		<microcharts.droid.ChartView   
         android:id="@+id/Chart2"  
-                                  android:layout_width="match_parent"  
-                                  android:layout_height="160dp"/>  
-    <microcharts.droid.ChartView android:id="@+id/Chart3"  
-                                  android:layout_width="match_parent"  
-                                  android:layout_height="160dp"/>  
-    <microcharts.droid.ChartView android:id="@+id/Chart4"  
-                                  android:layout_width="match_parent"  
-                                  android:layout_height="160dp"/>  
-    <microcharts.droid.ChartView android:id="@+id/Chart5"  
-                                  android:layout_width="match_parent"  
-                                  android:layout_height="160dp"/>  
-    <microcharts.droid.ChartView android:id="@+id/Chart6"  
-                                  android:layout_width="match_parent"  
-                                  android:layout_height="160dp"/>  
-  </LinearLayout>  
+        android:layout_width="match_parent"  
+        android:layout_height="160dp"
+		/>  
+
+		<microcharts.droid.ChartView android:id="@+id/Chart3"  
+        android:layout_width="match_parent"  
+        android:layout_height="160dp"
+		/> 
+		
+		<microcharts.droid.ChartView android:id="@+id/Chart4"  
+        android:layout_width="match_parent"  
+        android:layout_height="160dp"
+		/>  
+
+		<microcharts.droid.ChartView android:id="@+id/Chart5"  
+        android:layout_width="match_parent"  
+        android:layout_height="160dp"
+		/> 
+		
+		<microcharts.droid.ChartView android:id="@+id/Chart6"  
+        android:layout_width="match_parent"  
+        android:layout_height="160dp"
+		/>  
+
+  
+	</LinearLayout> 
+	
 </ScrollView>  

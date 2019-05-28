@@ -62,7 +62,11 @@ namespace consulta_Ejecutiva.Actividades
 
 			var charview = FindViewById<ChartView>(Resource.Id.BarChart);
 
-			var chartviwewBar = new BarChart() { Entries = entries };
+			var chartviwewBar = new BarChart()
+            {
+                Entries = entries,
+                BarAreaAlpha = 130
+            };
 
 			charview.Chart = chartviwewBar;
 

@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Actividades\Act_Graficos.cs" />
     <Compile Include="Actividades\Act_Grafico_BarChart.cs" />
+    <Compile Include="Actividades\Act_LineChart.cs" />
     <Compile Include="Actividades\Act_Login.cs" />
     <Compile Include="Actividades\Act_Main.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -123,6 +124,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Lay_Grafico_BarChart.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Lay_LineChart.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

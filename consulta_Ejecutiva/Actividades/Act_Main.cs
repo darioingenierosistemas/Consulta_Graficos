@@ -23,16 +23,24 @@ namespace consulta_Ejecutiva.Actividades
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Lay_Main);
-			FloatingActionButton BtnBarChart = FindViewById<FloatingActionButton>(Resource.Id.BtnBarras);
+
+			FloatingActionButton BtnBarChart = FindViewById<FloatingActionButton>(Resource.Id.fabBarChart);
 			BtnBarChart.Click += BtnBarChart_Click;
 
-		}
+            FloatingActionButton btnLineChart = FindViewById<FloatingActionButton>(Resource.Id.fabLineChart);
+            btnLineChart.Click += BtnLineChart_Click;
+        }
 
-		private void BtnBarChart_Click(object sender, EventArgs e)
+        private void BtnBarChart_Click(object sender, EventArgs e)
 		{
 			var intent = new Intent(this, typeof(Act_Grafico_BarChart));
-
 			StartActivity(intent);
 		}
-	}
+
+        private void BtnLineChart_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(Act_LineChart));
+            StartActivity(intent);
+        }
+    }
 }

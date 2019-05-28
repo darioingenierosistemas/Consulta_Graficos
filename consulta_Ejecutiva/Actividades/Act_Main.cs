@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Android.Support.V7.App;
 
+using Android.Support.Design.Widget;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -22,7 +23,16 @@ namespace consulta_Ejecutiva.Actividades
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Lay_Main);
-            
-        }
-    }
+			FloatingActionButton BtnBarChart = FindViewById<FloatingActionButton>(Resource.Id.BtnBarras);
+			BtnBarChart.Click += BtnBarChart_Click;
+
+		}
+
+		private void BtnBarChart_Click(object sender, EventArgs e)
+		{
+			var intent = new Intent(this, typeof(Act_Grafico_BarChart));
+
+			StartActivity(intent);
+		}
+	}
 }

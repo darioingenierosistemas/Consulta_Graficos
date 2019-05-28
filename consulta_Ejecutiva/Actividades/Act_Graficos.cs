@@ -60,21 +60,21 @@ namespace consulta_Ejecutiva.Actividades
             var chartview3 = FindViewById<ChartView>(Resource.Id.Chart3);
             var chartview4 = FindViewById<ChartView>(Resource.Id.Chart4);
             var chartview5 = FindViewById<ChartView>(Resource.Id.Chart5);
-            var chartview6 = FindViewById<ChartView>(Resource.Id.Chart6);
+         //   var chartview6 = FindViewById<ChartView>(Resource.Id.Chart6);
 
             var chart = new RadialGaugeChart() { Entries = entries };
             var chart2 = new LineChart() { Entries = entries };
             var chart3 = new DonutChart() { Entries = entries };
             var chart4 = new PointChart() { Entries = entries };
             var chart5 = new RadarChart() { Entries = entries };
-            var chart6 = new BarChart() { Entries = entries };
+         //   var chart6 = new BarChart() { Entries = entries };
 
             chartView.Chart = chart;
             chartview2.Chart = chart2;
             chartview4.Chart = chart3;
             chartview3.Chart = chart4;
             chartview5.Chart = chart5;
-            chartview6.Chart = chart6;
+         //   chartview6.Chart = chart6;
         }
 
 

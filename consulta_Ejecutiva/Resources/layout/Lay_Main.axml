@@ -51,6 +51,13 @@
 			android:layout_height="50dp"
 			android:layout_marginBottom="5dp"
 			android:background="@android:drawable/btn_dropdown" />
+
+		<Spinner
+			android:id="@+id/SpnUnidadOperativa1"
+			android:layout_width="fill_parent"
+			android:layout_height="50dp"
+			android:layout_marginBottom="5dp"
+			android:background="@android:drawable/btn_dropdown" />
 		
 		<Spinner
 			android:id="@+id/SpnContratista1"

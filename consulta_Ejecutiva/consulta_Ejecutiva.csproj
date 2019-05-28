@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actividades\Act_Graficos.cs" />
+    <Compile Include="Actividades\Act_Grafico_BarChart.cs" />
     <Compile Include="Actividades\Act_Login.cs" />
     <Compile Include="Actividades\Act_Main.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -119,6 +120,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\logo_pie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Lay_Grafico_BarChart.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

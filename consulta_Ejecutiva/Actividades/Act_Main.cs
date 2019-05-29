@@ -29,6 +29,16 @@ namespace consulta_Ejecutiva.Actividades
 
             FloatingActionButton btnLineChart = FindViewById<FloatingActionButton>(Resource.Id.fabLineChart);
             btnLineChart.Click += BtnLineChart_Click;
+
+            // boton Grafica de torta     
+            FloatingActionButton BtnDonutChart = FindViewById<FloatingActionButton>(Resource.Id.fabDonutChart);
+            BtnDonutChart.Click += BtnDonutChart_Click;
+        }
+
+        private void BtnDonutChart_Click(object sender, EventArgs e)
+        {
+            var DonutChart_ = new Intent(this, typeof(Act_DonutChart));
+            StartActivity(DonutChart_);
         }
 
         private void BtnBarChart_Click(object sender, EventArgs e)

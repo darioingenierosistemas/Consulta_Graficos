@@ -57,6 +57,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actividades\Act_DonutChart.cs" />
     <Compile Include="Actividades\Act_Graficos.cs" />
     <Compile Include="Actividades\Act_Grafico_BarChart.cs" />
     <Compile Include="Actividades\Act_LineChart.cs" />
@@ -129,6 +130,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Lay_LineChart.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Lay_DonutChart.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

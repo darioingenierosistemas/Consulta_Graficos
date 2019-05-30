@@ -268,7 +268,7 @@ namespace consulta_Ejecutiva.Actividades
                 {
                     var DonutChart_ = new Intent(this, typeof(Act_DonutChart));
                     DonutChart_.PutExtra("Contratista", CodContratista);
-                    DonutChart_.PutExtra("Mes", 3);
+                    DonutChart_.PutExtra("Mes", 4);
                     StartActivity(DonutChart_);
                 }
             }
@@ -282,7 +282,7 @@ namespace consulta_Ejecutiva.Actividades
                 {
                     var intent = new Intent(this, typeof(Act_Grafico_BarChart));
                     intent.PutExtra("Contratista", CodContratista);
-                    intent.PutExtra("Mes", 3);
+                    intent.PutExtra("Mes", 4);
                     StartActivity(intent);
                 }
             }
@@ -296,7 +296,7 @@ namespace consulta_Ejecutiva.Actividades
                 { 
                 var intent = new Intent(this, typeof(Act_LineChart));
                 intent.PutExtra("Contratista", CodContratista);
-                intent.PutExtra("Mes", 3);
+                intent.PutExtra("Mes", 4);
                 StartActivity(intent);
                 }
             }

@@ -16,13 +16,16 @@ namespace consulta_Ejecutiva.Actividades
 {
     [Activity(Label = "ESTADISTICAS DE PATRULLAJE"
         , MainLauncher = true
-        )]
+    )]
     public class Act_Main : AppCompatActivity
     {
 
         private static CheckBox Mes1;
         private static CheckBox Meses6;
         private static CheckBox Anho1;
+
+        private static RadioButton osl;
+        private static RadioButton tlo;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,12 +34,10 @@ namespace consulta_Ejecutiva.Actividades
 
             Inicializar();
             CheckStatus();
-
         }
 
         private void Inicializar()
         {
-
             FloatingActionButton BtnBarChart = FindViewById<FloatingActionButton>(Resource.Id.fabBarChart);
             BtnBarChart.Click += BtnBarChart_Click;
 
@@ -55,6 +56,11 @@ namespace consulta_Ejecutiva.Actividades
             Anho1 = FindViewById<CheckBox>(Resource.Id.btnUnAnho);
             Anho1.CheckedChange += Anho1_CheckedChange;
 
+            osl = FindViewById<RadioButton>(Resource.Id.rbtnOSL);
+            osl.CheckedChange += Osl_CheckedChange;
+
+            tlo = FindViewById<RadioButton>(Resource.Id.rbtnTLO);
+            tlo.CheckedChange += Tlo_CheckedChange;
         }
 
         private void CheckStatus()
@@ -62,12 +68,16 @@ namespace consulta_Ejecutiva.Actividades
             Mes1.Checked = false;
             Meses6.Checked = false;
             Anho1.Checked = false;
+
+            osl.Checked = false;
+            tlo.Checked = false;
         }
 
         private void Mes1_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
-            if (Meses6.Checked || Anho1.Checked)
+            if (Mes1.Checked)
             {
+                Mes1.Checked = true;
                 Meses6.Checked = false;
                 Anho1.Checked = false;
             }
@@ -75,19 +85,39 @@ namespace consulta_Ejecutiva.Actividades
 
         private void Meses6_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
-            if (Mes1.Checked || Anho1.Checked)
+            if (Meses6.Checked)
             {
                 Mes1.Checked = false;
+                Meses6.Checked = true;
                 Anho1.Checked = false;
             }
         }
 
         private void Anho1_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
-            if (Meses6.Checked || Mes1.Checked)
+            if (Anho1.Checked)
             {
-                Meses6.Checked = false;
                 Mes1.Checked = false;
+                Meses6.Checked = false;
+                Anho1.Checked = true;
+            }
+        }
+
+        private void Osl_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (osl.Checked)
+            {
+                osl.Checked = true;
+                tlo.Checked = false;
+            }
+        }
+
+        private void Tlo_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (tlo.Checked)
+            {
+                osl.Checked = false;
+                tlo.Checked = true;
             }
         }
 
@@ -97,11 +127,11 @@ namespace consulta_Ejecutiva.Actividades
             StartActivity(DonutChart_);
         }
 
-            private void BtnBarChart_Click(object sender, EventArgs e)
-		{
-			var intent = new Intent(this, typeof(Act_Grafico_BarChart));
-			StartActivity(intent);
-		}
+        private void BtnBarChart_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(Act_Grafico_BarChart));
+            StartActivity(intent);
+        }
 
         private void BtnLineChart_Click(object sender, EventArgs e)
         {

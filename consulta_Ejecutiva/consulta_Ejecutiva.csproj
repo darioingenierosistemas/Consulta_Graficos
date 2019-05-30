@@ -63,9 +63,11 @@
     <Compile Include="Actividades\Act_LineChart.cs" />
     <Compile Include="Actividades\Act_Login.cs" />
     <Compile Include="Actividades\Act_Main.cs" />
+    <Compile Include="BD\Tablas.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="REST\Cliente.cs" />
+    <Compile Include="REST\URLs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -105,11 +107,12 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>
     </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.5.231</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BD\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Lay_Graficos.axml">
       <SubType>Designer</SubType>

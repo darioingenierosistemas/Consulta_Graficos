@@ -282,7 +282,7 @@ namespace consulta_Ejecutiva.Actividades
                 {
                     var intent = new Intent(this, typeof(Act_Grafico_BarChart));
                     intent.PutExtra("Contratista", CodContratista);
-                    intent.PutExtra("Mes", 4);
+                    intent.PutExtra("Mes", "4");
                     StartActivity(intent);
                 }
             }

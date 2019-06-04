@@ -24,10 +24,16 @@ namespace consulta_Ejecutiva.Actividades
 	{
 		ObservableCollection<ChartData> Data2 = new ObservableCollection<ChartData>();
 		ObservableCollection<ChartData> Data3 = new ObservableCollection<ChartData>();
+		private string cod_contratista;
+		private string cantidad_meses;
+		private string nombre_contratista;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
+			cod_contratista = Intent.GetStringExtra("Contratista");
+			cantidad_meses = Intent.GetStringExtra("Mes");
+			//nombre_contratista = Intent.GetStringExtra();
 			GetDataBarChart();
 
 
@@ -35,7 +41,7 @@ namespace consulta_Ejecutiva.Actividades
 
 		private async void GetDataBarChart()
 		{
-			string urlBarChart = URLs.ConMes1 + "1245" + URLs.ConMes1y1 + "4";
+			string urlBarChart = URLs.ConMes1 + cod_contratista + URLs.ConMes1y1 + cantidad_meses;
 			var resultado = await urlBarChart.GetRequest<List<TABLA_MES1>>();
 			
 

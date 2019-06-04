@@ -18,7 +18,7 @@ using consulta_Ejecutiva.BD;
 namespace consulta_Ejecutiva.Actividades
 {
 	[Activity(Label = "Act_Grafico_BarChart"
-		, MainLauncher = true
+		//, MainLauncher = true
 		)]
 	public class Act_Grafico_BarChart : Activity
 	{

@@ -266,10 +266,10 @@ namespace consulta_Ejecutiva.Actividades
             {
                 if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
                 {
-                    var DonutChart_ = new Intent(this, typeof(Act_DonutChart));
-                    DonutChart_.PutExtra("Contratista", CodContratista);
-                    DonutChart_.PutExtra("Mes", 4);
-                    StartActivity(DonutChart_);
+                    //var DonutChart_ = new Intent(this, typeof(Act_DonutChart));
+                    //DonutChart_.PutExtra("Contratista", CodContratista);
+                    //DonutChart_.PutExtra("Mes", 4);
+                    //StartActivity(DonutChart_);
                 }
             }
         }
@@ -280,10 +280,10 @@ namespace consulta_Ejecutiva.Actividades
             {
                 if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
                 {
-                    var intent = new Intent(this, typeof(Act_Grafico_BarChart));
-                    intent.PutExtra("Contratista", CodContratista);
-                    intent.PutExtra("Mes", 4);
-                    StartActivity(intent);
+                    //var intent = new Intent(this, typeof(Act_Grafico_BarChart));
+                    //intent.PutExtra("Contratista", CodContratista);
+                    //intent.PutExtra("Mes", 4);
+                    //StartActivity(intent);
                 }
             }
         }
@@ -294,10 +294,10 @@ namespace consulta_Ejecutiva.Actividades
             { 
                 if(ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
                 { 
-                var intent = new Intent(this, typeof(Act_LineChart));
-                intent.PutExtra("Contratista", CodContratista);
-                intent.PutExtra("Mes", 4);
-                StartActivity(intent);
+                //var intent = new Intent(this, typeof(Act_LineChart));
+                //intent.PutExtra("Contratista", CodContratista);
+                //intent.PutExtra("Mes", 4);
+                //StartActivity(intent);
                 }
             }
         }

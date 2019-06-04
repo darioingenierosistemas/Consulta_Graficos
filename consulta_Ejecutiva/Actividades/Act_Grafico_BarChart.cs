@@ -9,69 +9,97 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Microcharts;
-using Entry = Microcharts.Entry;
-using Microcharts.Droid;
-using SkiaSharp;
+using Com.Syncfusion.Charts;
+using System.Collections.ObjectModel;
+using Android.Graphics;
+using consulta_Ejecutiva.REST;
+using consulta_Ejecutiva.BD;
 
 namespace consulta_Ejecutiva.Actividades
 {
 	[Activity(Label = "Act_Grafico_BarChart"
-		//, MainLauncher =true
+		, MainLauncher = true
 		)]
 	public class Act_Grafico_BarChart : Activity
 	{
+		ObservableCollection<ChartData> Data2 = new ObservableCollection<ChartData>();
+		ObservableCollection<ChartData> Data3 = new ObservableCollection<ChartData>();
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-			SetContentView(Resource.Layout.Lay_Grafico_BarChart);
+			GetDataBarChart();
 
-			GraficaBarChart();
+
 		}
 
-		private static string HexConverter()
+		private async void GetDataBarChart()
 		{
-			Android.Graphics.Color c = new Android.Graphics.Color((int)(Java.Lang.Math.Random() * 0x1000000));
-			return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
-		}
-		private void GraficaBarChart()
-		{
-			var entries = new[]
+			string urlBarChart = URLs.ConMes1 + "1245" + URLs.ConMes1y1 + "4";
+			var resultado = await urlBarChart.GetRequest<List<TABLA_MES1>>();
+
+			Window.RequestFeature(WindowFeatures.NoTitle);
+
+
+
+
+			SfChart chart = new SfChart(this);
+			chart.Title.Text = "Chart";
+			chart.SetBackgroundColor(Color.White);
+
+			//Inicializando Semanas 
+			CategoryAxis primaryAxis = new CategoryAxis();
+			primaryAxis.Title.Text = "Semanas";
+			chart.PrimaryAxis = primaryAxis;
+
+			//Inicializando Longitud 
+			NumericalAxis secondaryAxis = new NumericalAxis();
+			secondaryAxis.Title.Text = "Longitud ";
+			chart.SecondaryAxis = secondaryAxis;
+
+			for (int i = 0; i < 4; i++)
 			{
-				new Entry(20)
-				{
-				Label = "Enero",
-				ValueLabel = "20%",
-				Color = SKColor.Parse(HexConverter())
-				},
+				Data2.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA, Height = resultado[i].LONGITUD_ASIGNADA });
 
-				new Entry(30)
-				{
-				Label = "Febrero",
-				ValueLabel = "30%",
-				Color = SKColor.Parse(HexConverter())
-				},
+				Data3.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA, Height = resultado[i].LONGITUD_PATRULLADA });
+			}
 
-				new Entry(40)
-				{
-				Label = "Mayo",
-				ValueLabel = "40%",
-				Color = SKColor.Parse(HexConverter())
-				}
-			};
-
-			var charview = FindViewById<ChartView>(Resource.Id.BarChart);
-
-			var chartviwewBar = new BarChart()
-            {
-                Entries = entries,
-                BarAreaAlpha = 130
-            };
-
-			charview.Chart = chartviwewBar;
+			ColumnSeries seriesBar = new ColumnSeries();
+			seriesBar.ItemsSource = Data2;
+			seriesBar.XBindingPath = "Name";
+			seriesBar.YBindingPath = "Height";
+			seriesBar.Label = "Longitud Asignada";
+			seriesBar.DataMarker.ShowLabel = true;
+			seriesBar.TooltipEnabled = true;
+			//seriesBar.Color = Color.Blue;
 
 
+			ColumnSeries series = new ColumnSeries();
+			series.ItemsSource = Data3;
+			series.XBindingPath = "Name";
+			series.YBindingPath = "Height";
+			series.Label = "Longitud Patrullada";
+			series.DataMarker.ShowLabel = true;
+			series.TooltipEnabled = true;
+
+
+			chart.Series.Add(seriesBar);
+			chart.Series.Add(series);
+			chart.Legend.Visibility = Visibility.Visible;
+			SetContentView(chart);
+			//}
 
 		}
 	}
+
+
+	public class ChartData
+	{
+		public string Name { get; set; }
+
+		public double Height { get; set; }
+	}
+
+
+
 }

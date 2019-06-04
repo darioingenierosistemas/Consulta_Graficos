@@ -57,9 +57,6 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actividades\Act_DonutChart.cs" />
-    <Compile Include="Actividades\Act_Grafico_BarChart.cs" />
-    <Compile Include="Actividades\Act_LineChart.cs" />
     <Compile Include="Actividades\Act_Login.cs" />
     <Compile Include="Actividades\Act_Main.cs" />
     <Compile Include="BD\Tablas.cs" />
@@ -107,7 +104,11 @@
       <Version>1.5.231</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfChart.Android">
+<<<<<<< HEAD
       <Version>16.1.0.24</Version>
+=======
+      <Version>17.1.0.49</Version>
+>>>>>>> dd6e4734a81c45b2ceabc28ac27905564ad184c8
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
   </ItemGroup>

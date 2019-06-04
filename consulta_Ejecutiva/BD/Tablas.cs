@@ -148,5 +148,19 @@ namespace consulta_Ejecutiva.BD
             }
         }
 
+        private int m_ANHO;
+        public int ANHO
+        {
+
+            get
+            {
+                return m_ANHO;
+            }
+            set
+            {
+                this.m_ANHO = value;
+            }
+        }
+
     }
 }

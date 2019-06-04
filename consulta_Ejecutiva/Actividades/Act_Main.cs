@@ -19,7 +19,7 @@ using consulta_Ejecutiva.REST;
 namespace consulta_Ejecutiva.Actividades
 {
     [Activity(Label = "ESTADISTICAS DE PATRULLAJE"
-        , MainLauncher = true
+      //  , MainLauncher = true
     )]
     public class Act_Main : AppCompatActivity
     {

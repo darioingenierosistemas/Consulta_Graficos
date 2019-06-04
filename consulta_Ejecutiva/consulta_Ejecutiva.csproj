@@ -57,6 +57,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actividades\Act_Grafico_BarChart.cs" />
     <Compile Include="Actividades\Act_Login.cs" />
     <Compile Include="Actividades\Act_Main.cs" />
     <Compile Include="BD\Tablas.cs" />

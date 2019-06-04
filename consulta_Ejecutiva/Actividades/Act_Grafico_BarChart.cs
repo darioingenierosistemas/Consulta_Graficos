@@ -54,7 +54,7 @@ namespace consulta_Ejecutiva.Actividades
 
 			//Inicializando Longitud 
 			NumericalAxis secondaryAxis = new NumericalAxis();
-			secondaryAxis.Title.Text = "Longitud ";
+			secondaryAxis.Title.Text = "Longitud (mt) ";
 			chart.SecondaryAxis = secondaryAxis;
 
 			for (int i = 0; i < 4; i++)

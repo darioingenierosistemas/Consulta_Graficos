@@ -37,6 +37,7 @@ namespace consulta_Ejecutiva.Actividades
 		{
 			string urlBarChart = URLs.ConMes1 + "1245" + URLs.ConMes1y1 + "4";
 			var resultado = await urlBarChart.GetRequest<List<TABLA_MES1>>();
+			
 
 			Window.RequestFeature(WindowFeatures.NoTitle);
 
@@ -59,9 +60,9 @@ namespace consulta_Ejecutiva.Actividades
 
 			for (int i = 0; i < 4; i++)
 			{
-				Data2.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA, Height = resultado[i].LONGITUD_ASIGNADA });
+				Data2.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA + "/" +  resultado[i].ANHO, Height = resultado[i].LONGITUD_ASIGNADA });
 
-				Data3.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA, Height = resultado[i].LONGITUD_PATRULLADA });
+				Data3.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_PATRULLADA });
 			}
 
 			ColumnSeries seriesBar = new ColumnSeries();
@@ -81,6 +82,8 @@ namespace consulta_Ejecutiva.Actividades
 			series.Label = "Longitud Patrullada";
 			series.DataMarker.ShowLabel = true;
 			series.TooltipEnabled = true;
+			series.Color = Color.Black;
+			
 
 
 			chart.Series.Add(seriesBar);

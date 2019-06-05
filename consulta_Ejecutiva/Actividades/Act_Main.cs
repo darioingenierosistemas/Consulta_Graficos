@@ -204,7 +204,7 @@ namespace consulta_Ejecutiva.Actividades
                 Anho1.Checked = false;
                 if (Mes1.Checked == true)
                 {
-                    Mes = "1";
+                    Mes = "4";
 
                 }
             }

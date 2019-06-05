@@ -25,6 +25,8 @@ namespace consulta_Ejecutiva.Actividades
     {
         string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
 
+        private ProgressDialog mProgress;
+
         private string CodContratista;
         private string NomContratista;
         private string Mes;
@@ -36,9 +38,6 @@ namespace consulta_Ejecutiva.Actividades
         private static CheckBox Mes1;
         private static CheckBox Meses6;
         private static CheckBox Anho1;
-
-        private static RadioButton osl;
-        private static RadioButton tlo;
 
         private static Spinner Departamentos;
         private static Spinner Unidad_Operativa;
@@ -54,14 +53,27 @@ namespace consulta_Ejecutiva.Actividades
 
         private ArrayAdapter<string> adapter;
 
+        private List<KeyValuePair<string, string>> DepKey;
+        private List<KeyValuePair<string, string>> UniKey;
+        private List<KeyValuePair<string, string>> ConKey;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Lay_Main);
 
+            mProgress = new ProgressDialog(this);
+            mProgress.SetCancelable(true);
+            mProgress.SetMessage("Cargando.....");
+            mProgress.SetProgressStyle(ProgressDialogStyle.Spinner);
+
+            mProgress.Show();
+
             Inicializar();
             CheckStatus();
             PoblarSpinnerDep();
+
+            mProgress.Dismiss();
         }
 
         private void Inicializar()
@@ -73,8 +85,6 @@ namespace consulta_Ejecutiva.Actividades
             FloatingActionButton btnLineChart = FindViewById<FloatingActionButton>(Resource.Id.fabLineChart);
             btnLineChart.Click += BtnLineChart_Click;
 
-            FloatingActionButton BtnDonutChart = FindViewById<FloatingActionButton>(Resource.Id.fabDonutChart);
-            BtnDonutChart.Click += BtnDonutChart_Click;
 
             Mes1 = FindViewById<CheckBox>(Resource.Id.btnUnMes);
             Mes1.CheckedChange += Mes1_CheckedChange;
@@ -84,12 +94,6 @@ namespace consulta_Ejecutiva.Actividades
 
             Anho1 = FindViewById<CheckBox>(Resource.Id.btnUnAnho);
             Anho1.CheckedChange += Anho1_CheckedChange;
-
-            osl = FindViewById<RadioButton>(Resource.Id.rbtnOSL);
-            osl.CheckedChange += Osl_CheckedChange;
-
-            tlo = FindViewById<RadioButton>(Resource.Id.rbtnTLO);
-            tlo.CheckedChange += Tlo_CheckedChange;
 
             Departamentos = FindViewById<Spinner>(Resource.Id.SpnDepartamento1);
             Departamentos.SetSelection(0, false);
@@ -110,34 +114,35 @@ namespace consulta_Ejecutiva.Actividades
             Mes1.Checked = false;
             Meses6.Checked = false;
             Anho1.Checked = false;
-
-            osl.Checked = false;
-            tlo.Checked = false;
         }
 
         private async void PoblarSpinnerDep()
         {
             try
             {
-                    var result = await URLs.ConDep.GetRequest<List<TABLA_DEPARTAMENTOS>>();
+                var result = await URLs.ConDep.GetRequest<List<TABLA_DEPARTAMENTOS>>();
+                List<string> ListaDepartamentos = new List<string>();
+                DepKey = new List<KeyValuePair<string, string>>();
+                DepKey.Add(new KeyValuePair<string, string>("0", "--SELECCIONE DEPARTAMENTO--"));
+                foreach (var departamento in result)
+                {
+                    DepKey.Add(new KeyValuePair<string, string>(departamento.CODIGO.ToString(), departamento.NOMBRE));
+                }
 
-                    List<string> ListaDepartamentos = new List<string>();
-                    ListaDepartamentos.Add("--SELECCIONE DEPARTAMENTO--");
+                foreach (var dep in DepKey)
+                {
+                    ListaDepartamentos.Add(dep.Value);
+                }
 
-                    foreach (var departamento in result)
-                    {
-                        ListaDepartamentos.Add(departamento.CODIGO+"    "+departamento.NOMBRE.ToString());
-                    }
+                adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, ListaDepartamentos);
+                adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+                Departamentos.Adapter = adapter;
 
-                    adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, ListaDepartamentos);
-                    adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-                    Departamentos.Adapter = adapter;
-                
             }
             catch (Exception ex)
             {
                 Toast.MakeText(ApplicationContext, ex.ToString(), ToastLength.Long).Show();
-               
+
             }
 
         }
@@ -147,15 +152,22 @@ namespace consulta_Ejecutiva.Actividades
             try
             {
 
-                var result= await (URLs.ConUni+cod).GetRequest<List<TABLA_UNIDAD_OPERATIVA>>();
+                var result = await (URLs.ConUni + cod).GetRequest<List<TABLA_UNIDAD_OPERATIVA>>();
 
                 List<string> ListaUnidadOperativa = new List<string>();
-                ListaUnidadOperativa.Add("--SELECCIONE UNIDAD OPERATIVA--");
+                UniKey = new List<KeyValuePair<string, string>>();
+                UniKey.Add(new KeyValuePair<string, string>("0", "--SELECCIONE UNIDAD OPERATIVA--"));
 
                 foreach (var unidad in result)
                 {
-                    ListaUnidadOperativa.Add(unidad.OPERATING_UNIT_ID.ToString()+"    "+unidad.OPER_UNIT_CODE);
+                    UniKey.Add(new KeyValuePair<string, string>(unidad.OPERATING_UNIT_ID.ToString(), unidad.OPER_UNIT_CODE));
                 }
+
+                foreach (var uni in UniKey)
+                {
+                    ListaUnidadOperativa.Add(uni.Value);
+                }
+
 
                 adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, ListaUnidadOperativa);
                 adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
@@ -177,11 +189,17 @@ namespace consulta_Ejecutiva.Actividades
                 var result = await (URLs.ConCon + cod).GetRequest<List<TABLA_CONTRATISTA>>();
 
                 List<string> ListaContratista = new List<string>();
-                ListaContratista.Add("--SELECCIONE CONTRATISTA--");
+                ConKey = new List<KeyValuePair<string, string>>();
+                ConKey.Add(new KeyValuePair<string, string>("0", "--SELECCIONE UNIDAD OPERATIVA--"));
 
                 foreach (var contratista in result)
                 {
-                    ListaContratista.Add(contratista.COD_CONTRATISTA+"    "+ contratista.NOM_CONTRATISTA.ToString());
+                    ConKey.Add(new KeyValuePair<string, string>(contratista.COD_CONTRATISTA.ToString(), contratista.NOM_CONTRATISTA));
+                }
+
+                foreach (var con in ConKey)
+                {
+                    ListaContratista.Add(con.Value);
                 }
 
                 adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, ListaContratista);
@@ -239,37 +257,6 @@ namespace consulta_Ejecutiva.Actividades
             }
         }
 
-        private void Osl_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            if (osl.Checked)
-            {
-                osl.Checked = true;
-                tlo.Checked = false;
-            }
-        }
-
-        private void Tlo_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            if (tlo.Checked)
-            {
-                osl.Checked = false;
-                tlo.Checked = true;
-            }
-        }
-
-        private void BtnDonutChart_Click(object sender, EventArgs e)
-        {
-            if (Mes1.Checked == true || Meses6.Checked == true || Anho1.Checked == true)
-            {
-                if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
-                {
-                    //var DonutChart_ = new Intent(this, typeof(Act_DonutChart));
-                    //DonutChart_.PutExtra("Contratista", CodContratista);
-                    //DonutChart_.PutExtra("Mes", 4);
-                    //StartActivity(DonutChart_);
-                }
-            }
-        }
 
         private void BtnBarChart_Click(object sender, EventArgs e)
         {
@@ -291,29 +278,29 @@ namespace consulta_Ejecutiva.Actividades
             if (Mes1.Checked == true || Meses6.Checked == true || Anho1.Checked == true)
             { 
                 if(ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
-                { 
-                //var intent = new Intent(this, typeof(Act_LineChart));
-                //intent.PutExtra("Contratista", CodContratista);
-                //intent.PutExtra("Mes", 4);
-                //StartActivity(intent);
+                {
+                    var intent = new Intent(this, typeof(Act_LineChart));
+                    intent.PutExtra("Contratista", CodContratista);
+                    intent.PutExtra("Mes", Mes);
+                    StartActivity(intent);
                 }
             }
         }
 
         private void Departamentos_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            
+
             ItemPositionDep = Departamentos.SelectedItemPosition;
 
             if (ItemPositionDep != 0)
             {
-                PositionDep = Departamentos.GetItemAtPosition(ItemPositionDep).ToString();
-                string[] dividir = PositionDep.Split("    ");
-                int cod = Convert.ToInt16(dividir[0]);
+                Spinner spinner = (Spinner)sender;
+                string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), DepKey[e.Position].Key);
+                int cod = Convert.ToInt16(toast);
                 try
                 {
                     PoblarSpinnerUni(cod);
-             
+
                 }
                 catch (Exception ex)
                 {
@@ -327,11 +314,11 @@ namespace consulta_Ejecutiva.Actividades
         {
 
             ItemPositionUni = Unidad_Operativa.SelectedItemPosition;
-            if (ItemPositionUni!=0)
+            if (ItemPositionUni != 0)
             {
-                PositionUni = Unidad_Operativa.GetItemAtPosition(ItemPositionUni).ToString();
-                string[] dividir = PositionUni.Split("    ");
-                int cod = Convert.ToInt16(dividir[0]);
+                Spinner spinner = (Spinner)sender;
+                string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), UniKey[e.Position].Key);
+                int cod = Convert.ToInt16(toast);
 
                 try
                 {
@@ -349,13 +336,15 @@ namespace consulta_Ejecutiva.Actividades
 
         private void Contratista_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
+            
             ItemPositionCon = Contratista.SelectedItemPosition;
             if (ItemPositionCon != 0)
             {
-                PositionCon = Contratista.GetItemAtPosition(ItemPositionCon).ToString();
-                string[] dividir = PositionCon.Split("    ");
-                CodContratista = dividir[0];
-                NomContratista = dividir[1];
+                Spinner spinner = (Spinner)sender;
+                string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Key);
+                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Key);
+                CodContratista = toast;
+                NomContratista = toast1;
             }
         }
 

@@ -88,8 +88,6 @@ namespace consulta_Ejecutiva.Actividades
             FloatingActionButton btnLineChart = FindViewById<FloatingActionButton>(Resource.Id.fabLineChart);
             btnLineChart.Click += BtnLineChart_Click;
 
-            FloatingActionButton BtnDonutChart = FindViewById<FloatingActionButton>(Resource.Id.fabDonutChart);
-            BtnDonutChart.Click += BtnDonutChart_Click;
 
             Mes1 = FindViewById<CheckBox>(Resource.Id.btnUnMes);
             Mes1.CheckedChange += Mes1_CheckedChange;
@@ -99,12 +97,6 @@ namespace consulta_Ejecutiva.Actividades
 
             Anho1 = FindViewById<CheckBox>(Resource.Id.btnUnAnho);
             Anho1.CheckedChange += Anho1_CheckedChange;
-
-            osl = FindViewById<RadioButton>(Resource.Id.rbtnOSL);
-            osl.CheckedChange += Osl_CheckedChange;
-
-            tlo = FindViewById<RadioButton>(Resource.Id.rbtnTLO);
-            tlo.CheckedChange += Tlo_CheckedChange;
 
             Departamentos = FindViewById<Spinner>(Resource.Id.SpnDepartamento1);
             Departamentos.SetSelection(0, false);
@@ -289,19 +281,6 @@ namespace consulta_Ejecutiva.Actividades
             }
         }
 
-        private void BtnDonutChart_Click(object sender, EventArgs e)
-        {
-            if (Mes1.Checked == true || Meses6.Checked == true || Anho1.Checked == true)
-            {
-                if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
-                {
-                    //var DonutChart_ = new Intent(this, typeof(Act_DonutChart));
-                    //DonutChart_.PutExtra("Contratista", CodContratista);
-                    //DonutChart_.PutExtra("Mes", 4);
-                    //StartActivity(DonutChart_);
-                }
-            }
-        }
 
         private void BtnBarChart_Click(object sender, EventArgs e)
         {
@@ -323,11 +302,11 @@ namespace consulta_Ejecutiva.Actividades
             if (Mes1.Checked == true || Meses6.Checked == true || Anho1.Checked == true)
             { 
                 if(ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
-                { 
-                //var intent = new Intent(this, typeof(Act_LineChart));
-                //intent.PutExtra("Contratista", CodContratista);
-                //intent.PutExtra("Mes", 4);
-                //StartActivity(intent);
+                {
+                    var intent = new Intent(this, typeof(Act_LineChart));
+                    intent.PutExtra("Contratista", CodContratista);
+                    intent.PutExtra("Mes", Mes);
+                    StartActivity(intent);
                 }
             }
         }

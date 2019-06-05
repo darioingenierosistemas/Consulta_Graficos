@@ -163,4 +163,66 @@ namespace consulta_Ejecutiva.BD
         }
 
     }
+
+    [Table("TABLA_MESES")]
+    public class TABLA_MESES
+    {
+        private double m_LONGITUD_ASIGNADA;
+        public double LONGITUD_ASIGNADA
+        {
+
+            get
+            {
+                return m_LONGITUD_ASIGNADA;
+            }
+            set
+            {
+                this.m_LONGITUD_ASIGNADA = value;
+            }
+        }
+
+        private double m_LONGITUD_PATRULLADA;
+        public double LONGITUD_PATRULLADA
+        {
+
+            get
+            {
+                return m_LONGITUD_PATRULLADA;
+            }
+            set
+            {
+                this.m_LONGITUD_PATRULLADA = value;
+            }
+        }
+
+        private int m_MES;
+        public int MES
+        {
+
+            get
+            {
+                return m_MES;
+            }
+            set
+            {
+                this.m_MES = value;
+            }
+        }
+
+        private int m_ANHO;
+        public int ANHO
+        {
+
+            get
+            {
+                return m_ANHO;
+            }
+            set
+            {
+                this.m_ANHO = value;
+            }
+        }
+
+    }
+
 }

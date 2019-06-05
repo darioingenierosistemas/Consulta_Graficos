@@ -282,6 +282,7 @@ namespace consulta_Ejecutiva.Actividades
                     var intent = new Intent(this, typeof(Act_LineChart));
                     intent.PutExtra("Contratista", CodContratista);
                     intent.PutExtra("Mes", Mes);
+                    intent.PutExtra("NomContratista", NomContratista);
                     StartActivity(intent);
                 }
             }
@@ -342,7 +343,7 @@ namespace consulta_Ejecutiva.Actividades
             {
                 Spinner spinner = (Spinner)sender;
                 string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Key);
-                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Key);
+                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Value);
                 CodContratista = toast;
                 NomContratista = toast1;
             }

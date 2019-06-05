@@ -88,16 +88,16 @@
 			
 		<android.support.design.widget.FloatingActionButton 
 			android:id="@+id/fabBarChart" 
-			android:layout_width="100dp" 
-			android:layout_height="100dp" 
+			android:layout_width="70dp" 
+			android:layout_height="70dp" 
 			android:layout_margin="10dp"
 			android:backgroundTint="#4CAF50"
 			android:src="@drawable/logo_barchart" /> 
 
 		<android.support.design.widget.FloatingActionButton 
 			android:id="@+id/fabLineChart" 
-			android:layout_width="100dp" 
-			android:layout_height="100dp" 
+			android:layout_width="70dp" 
+			android:layout_height="70dp" 
 			android:layout_margin="10dp"
 			android:backgroundTint="#4CAF50"
 			android:src="@drawable/logo_linechart" /> 

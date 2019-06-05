@@ -39,9 +39,6 @@ namespace consulta_Ejecutiva.Actividades
         private static CheckBox Meses6;
         private static CheckBox Anho1;
 
-        private static RadioButton osl;
-        private static RadioButton tlo;
-
         private static Spinner Departamentos;
         private static Spinner Unidad_Operativa;
         private static Spinner Contratista;
@@ -117,9 +114,6 @@ namespace consulta_Ejecutiva.Actividades
             Mes1.Checked = false;
             Meses6.Checked = false;
             Anho1.Checked = false;
-
-            osl.Checked = false;
-            tlo.Checked = false;
         }
 
         private async void PoblarSpinnerDep()
@@ -260,24 +254,6 @@ namespace consulta_Ejecutiva.Actividades
                 {
                     Mes = "12";
                 }
-            }
-        }
-
-        private void Osl_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            if (osl.Checked)
-            {
-                osl.Checked = true;
-                tlo.Checked = false;
-            }
-        }
-
-        private void Tlo_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            if (tlo.Checked)
-            {
-                osl.Checked = false;
-                tlo.Checked = true;
             }
         }
 

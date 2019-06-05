@@ -27,6 +27,7 @@ namespace consulta_Ejecutiva.Actividades
 		private string cod_contratista;
 		private string cantidad_meses;
 		private string nombre_contratista;
+		
 
 
 		protected override void OnCreate(Bundle savedInstanceState)
@@ -34,38 +35,26 @@ namespace consulta_Ejecutiva.Actividades
 			base.OnCreate(savedInstanceState);
 			cod_contratista = Intent.GetStringExtra("Contratista");
 			cantidad_meses = Intent.GetStringExtra("Mes");
-			//nombre_contratista = Intent.GetStringExtra();
+			nombre_contratista = Intent.GetStringExtra("NomContratista");
 			GetDataBarChart();
 
 
 		}
 
 		private async void GetDataBarChart()
-		{    // url para el boton de 1 mes
+		{    
+			// url para el boton de 1 mes
+			string urlBarChart = URLs.ConMes1 + cod_contratista + URLs.ConMes1y1 + cantidad_meses;
+			var resultado = await urlBarChart.GetRequest<List<TABLA_MES1>>();
 			
-
-				string urlBarChart = URLs.ConMes1 + cod_contratista + URLs.ConMes1y1 + cantidad_meses;
-				var resultado = await urlBarChart.GetRequest<List<TABLA_MES1>>();
+			// url para el boton de 6 meses
+			string urlBarcharMeses = URLs.ConMeses6 + cod_contratista + URLs.ConMeses6y1 + cantidad_meses;
+			var resultadoBtnMeses = await urlBarcharMeses.GetRequest<List<TABLA_MESES>>();
 			
-			
-				// url para el boton de 6 meses
-				string urlBarcharMeses = URLs.ConMeses6 + cod_contratista + URLs.ConMeses6y1 + cantidad_meses;
-				var resultadoBtnMeses = await urlBarcharMeses.GetRequest<List<TABLA_MESES>>();
-			
-				//url para el boton de 1 año
-
-				string urlBarcharAño = URLs.ConMeses12 + cod_contratista + URLs.ConMeses6y1 + cantidad_meses;
-				var resultadoBtnAños = await urlBarcharAño.GetRequest<List<TABLA_MESES>>();
-			
-			
-
 			Window.RequestFeature(WindowFeatures.NoTitle);
 
-
-
-
 			SfChart chart = new SfChart(this);
-			chart.Title.Text = "Contratista";
+			chart.Title.Text ="Contratista: " + nombre_contratista;
 			chart.SetBackgroundColor(Color.White);
 
 			ChartZoomPanBehavior zoomPanBehavior = new ChartZoomPanBehavior();
@@ -75,7 +64,7 @@ namespace consulta_Ejecutiva.Actividades
 
 			//Inicializando Semanas 
 			CategoryAxis primaryAxis = new CategoryAxis();
-			primaryAxis.Title.Text = "Semanas";
+			//primaryAxis.Title.Text = "Semanas";
 			chart.PrimaryAxis = primaryAxis;
 
 			//scroll
@@ -91,35 +80,31 @@ namespace consulta_Ejecutiva.Actividades
 			secondaryAxis.Title.Text = "Longitud  (mt) ";
 			chart.SecondaryAxis = secondaryAxis;
 		
-
 			if (cantidad_meses == "4")
 			{
-				for (int i = 0; i < 4; i++)
+				foreach(var semanas in resultado)
+
 				{
-					Data2.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA, Height = resultado[i].LONGITUD_ASIGNADA });
-					Data3.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA, Height = resultado[i].LONGITUD_PATRULLADA });
-					chart.Legend.Title.Text = "Año " + resultado[i].ANHO;
+					Data2.Add(new ChartData { Name = "Semana " + semanas.SEMANA, Height = semanas.LONGITUD_ASIGNADA });
+					Data3.Add(new ChartData { Name = "Semana " + semanas.SEMANA, Height = semanas.LONGITUD_PATRULLADA });
+					//chart.Legend.Title.Text = "Año "+ semanas.ANHO;
+					primaryAxis.Title.Text = "Semanas";
+					//semananas = "Semanas";
 				}
 			}
-			else if (cantidad_meses == "6")
+			else if (cantidad_meses == "6"  || cantidad_meses =="12")
 			{
-				for (int i = 0; i < 6; i++)
+				foreach (var semanasMes in resultadoBtnMeses)
 				{
-					Data2.Add(new ChartData { Name = "Mes " + resultadoBtnMeses[i].MES, Height = resultadoBtnMeses[i].LONGITUD_ASIGNADA });
-					Data3.Add(new ChartData { Name = "Mes " + resultadoBtnMeses[i].MES, Height = resultadoBtnMeses[i].LONGITUD_PATRULLADA });
-					chart.Legend.Title.Text = "Año " + resultadoBtnMeses[i].ANHO;
+					Data2.Add(new ChartData { Name = "Mes " + semanasMes.MES, Height = semanasMes.LONGITUD_ASIGNADA });
+					Data3.Add(new ChartData { Name = "Mes " + semanasMes.MES, Height = semanasMes.LONGITUD_PATRULLADA });
+					chart.Legend.Title.Text = "Año " + semanasMes.ANHO;
+					primaryAxis.Title.Text = "Meses";
+
 				}
 
 			}
-			else if (cantidad_meses == "12")
-			{
-				for (int i = 0; i < 12; i++)
-				{
-					Data2.Add(new ChartData { Name = "Mes " + resultadoBtnAños[i].MES , Height = resultadoBtnAños[i].LONGITUD_ASIGNADA });
-					Data3.Add(new ChartData { Name = "Mes " + resultadoBtnAños[i].MES , Height = resultadoBtnAños[i].LONGITUD_PATRULLADA });
-				}
-
-			}
+		
 			ColumnSeries seriesBar = new ColumnSeries();
 			seriesBar.ItemsSource = Data2;
 			seriesBar.XBindingPath = "Name";
@@ -133,7 +118,6 @@ namespace consulta_Ejecutiva.Actividades
 			seriesBar.SelectedDataPointColor = Color.Red;
 			//	var colors = new List<Color>();
 			//	colors.Add(Color.ParseColor("#094AC3"));
-
 
 			ColumnSeries series = new ColumnSeries();
 			series.ItemsSource = Data3;
@@ -150,16 +134,19 @@ namespace consulta_Ejecutiva.Actividades
 
 
 			chart.Series.Add(seriesBar);
+			chart.Legend.Title.Text = "Año ";
+			chart.Legend.LabelStyle.MarginBottom = 5;
+			chart.Legend.LabelStyle.MarginLeft = 5;
+			chart.Legend.LabelStyle.MarginRight = 5;
+			chart.Legend.LabelStyle.MarginTop = 5;
 			//chart.ColorModel.ColorPalette = ChartColorPalette.Custom;
 			//chart.ColorModel.CustomColors = colors;
 			chart.Series.Add(series);
 			chart.Legend.Visibility = Visibility.Visible;
 			SetContentView(chart);
 		
-
 		}
 	}
-
 
 	public class ChartData
 	{

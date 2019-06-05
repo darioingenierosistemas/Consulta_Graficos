@@ -72,17 +72,17 @@ namespace consulta_Ejecutiva.Actividades
 					Data3.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_PATRULLADA });
 				}
 			}
-			//else if ()
-			//{
-			//	for (int i = 0; i < 4; i++)
-			//	{
-			//		Data2.Add(new ChartData { Name = "Mes " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_ASIGNADA });
+			else if (cantidad_meses == "6")
+			{
+				for (int i = 0; i < 7; i++)
+				{
+					Data2.Add(new ChartData { Name = "Mes " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_ASIGNADA });
 
-			//		Data3.Add(new ChartData { Name = "Mes " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_PATRULLADA });
-			//	}
+					Data3.Add(new ChartData { Name = "Mes " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_PATRULLADA });
+				}
 
-			//}
-			ColumnSeries seriesBar = new ColumnSeries();
+				}
+				ColumnSeries seriesBar = new ColumnSeries();
 			seriesBar.ItemsSource = Data2;
 			seriesBar.XBindingPath = "Name";
 			seriesBar.YBindingPath = "Height";

@@ -350,7 +350,7 @@ namespace consulta_Ejecutiva.Actividades
             if (ItemPositionCon != 0)
             {
                 PositionCon = Contratista.GetItemAtPosition(ItemPositionCon).ToString();
-                string[] dividir = PositionUni.Split("    ");
+                string[] dividir = PositionCon.Split("    ");
                 CodContratista = Convert.ToInt16(dividir[0]);
             }
         }

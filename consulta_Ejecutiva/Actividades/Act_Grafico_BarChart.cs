@@ -60,20 +60,10 @@ namespace consulta_Ejecutiva.Actividades
 
 			ChartZoomPanBehavior zoomPanBehavior = new ChartZoomPanBehavior();
 			chart.Behaviors.Add(zoomPanBehavior);
-			zoomPanBehavior.ZoomMode = ZoomMode.X;
-			zoomPanBehavior.SelectionZoomingEnabled = true;
 
 			//Inicializando Semanas 
 			CategoryAxis primaryAxis = new CategoryAxis();
 			chart.PrimaryAxis = primaryAxis;
-
-			//scroll
-			//chart.PrimaryAxis = new CategoryAxis()
-			//{
-			//	AutoScrollingDelta = 6,
-
-			//	AutoScrollingMode = ChartAutoScrollingMode.Start
-			//};
 
 			//Inicializando Longitud 
 			NumericalAxis secondaryAxis = new NumericalAxis();
@@ -113,7 +103,6 @@ namespace consulta_Ejecutiva.Actividades
 			//seriesBar.DataMarker.ShowLabel = true;
 			seriesBar.TooltipEnabled = true;
 			seriesBar.DataPointSelectionEnabled = true;
-			//seriesBar.SelectedDataPointIndex = 2;
 			seriesBar.SelectedDataPointColor = Color.Red;
 			//	var colors = new List<Color>();
 			//	colors.Add(Color.ParseColor("#094AC3"));

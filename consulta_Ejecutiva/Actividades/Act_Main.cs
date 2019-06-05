@@ -26,6 +26,7 @@ namespace consulta_Ejecutiva.Actividades
         string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
 
         private string CodContratista;
+        private string NomContratista;
         private string Mes;
 
         private bool Bmes1 = false;
@@ -279,6 +280,7 @@ namespace consulta_Ejecutiva.Actividades
                     var intent = new Intent(this, typeof(Act_Grafico_BarChart));
                     intent.PutExtra("Contratista", CodContratista);
                     intent.PutExtra("Mes", Mes);
+                    intent.PutExtra("NomContratista", NomContratista);
                     StartActivity(intent);
                 }
             }
@@ -353,6 +355,7 @@ namespace consulta_Ejecutiva.Actividades
                 PositionCon = Contratista.GetItemAtPosition(ItemPositionCon).ToString();
                 string[] dividir = PositionCon.Split("    ");
                 CodContratista = dividir[0];
+                NomContratista = dividir[1];
             }
         }
 

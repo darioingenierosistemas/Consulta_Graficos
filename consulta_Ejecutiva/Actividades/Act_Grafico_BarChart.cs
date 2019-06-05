@@ -51,7 +51,7 @@ namespace consulta_Ejecutiva.Actividades
 
 
 			SfChart chart = new SfChart(this);
-			chart.Title.Text = "Chart";
+			chart.Title.Text = "Contratista";
 			chart.SetBackgroundColor(Color.White);
 
 			//Inicializando Semanas 
@@ -61,16 +61,27 @@ namespace consulta_Ejecutiva.Actividades
 
 			//Inicializando Longitud 
 			NumericalAxis secondaryAxis = new NumericalAxis();
-			secondaryAxis.Title.Text = "Longitud (mt) ";
+			secondaryAxis.Title.Text = "Longitud  (mt) ";
 			chart.SecondaryAxis = secondaryAxis;
-
-			for (int i = 0; i < 4; i++)
+			if (cantidad_meses == "4")
 			{
-				Data2.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA + "/" +  resultado[i].ANHO, Height = resultado[i].LONGITUD_ASIGNADA });
+				for (int i = 0; i < 4; i++)
+				{
+					Data2.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_ASIGNADA });
 
-				Data3.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_PATRULLADA });
+					Data3.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_PATRULLADA });
+				}
 			}
+			//else if ()
+			//{
+			//	for (int i = 0; i < 4; i++)
+			//	{
+			//		Data2.Add(new ChartData { Name = "Mes " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_ASIGNADA });
 
+			//		Data3.Add(new ChartData { Name = "Mes " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_PATRULLADA });
+			//	}
+
+			//}
 			ColumnSeries seriesBar = new ColumnSeries();
 			seriesBar.ItemsSource = Data2;
 			seriesBar.XBindingPath = "Name";
@@ -79,6 +90,8 @@ namespace consulta_Ejecutiva.Actividades
 			seriesBar.DataMarker.ShowLabel = true;
 			seriesBar.TooltipEnabled = true;
 			//seriesBar.Color = Color.Blue;
+			var colors = new List<Color>();
+			colors.Add(Color.ParseColor("#ffffff"));
 
 
 			ColumnSeries series = new ColumnSeries();
@@ -93,10 +106,12 @@ namespace consulta_Ejecutiva.Actividades
 
 
 			chart.Series.Add(seriesBar);
+			chart.ColorModel.ColorPalette = ChartColorPalette.Custom;
+			chart.ColorModel.CustomColors = colors;
 			chart.Series.Add(series);
 			chart.Legend.Visibility = Visibility.Visible;
 			SetContentView(chart);
-			//}
+		
 
 		}
 	}

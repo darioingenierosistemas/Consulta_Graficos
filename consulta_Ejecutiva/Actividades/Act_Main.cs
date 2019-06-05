@@ -26,6 +26,7 @@ namespace consulta_Ejecutiva.Actividades
         string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
 
         private int CodContratista;
+        private string Mes;
 
         private bool Bmes1 = false;
         private bool Bmeses6 = false;
@@ -203,9 +204,7 @@ namespace consulta_Ejecutiva.Actividades
                 Anho1.Checked = false;
                 if (Mes1.Checked == true)
                 {
-                    Bmes1 = true;
-                    Bmeses6 = false;
-                    Banho = false;
+                    Mes = "4";
                 }
             }
         }
@@ -219,9 +218,7 @@ namespace consulta_Ejecutiva.Actividades
                 Anho1.Checked = false;
                 if (Meses6.Checked == true)
                 {
-                    Bmes1 = false;
-                    Bmeses6 = true;
-                    Banho = false;
+                    Mes = "6";
                 }
             }
         }
@@ -235,9 +232,7 @@ namespace consulta_Ejecutiva.Actividades
                 Anho1.Checked = true;
                 if (Anho1.Checked == true)
                 {
-                    Bmes1 = false;
-                    Bmeses6 = false;
-                    Banho = true;
+                    Mes = "12";
                 }
             }
         }

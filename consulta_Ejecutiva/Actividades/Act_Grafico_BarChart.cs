@@ -54,7 +54,8 @@ namespace consulta_Ejecutiva.Actividades
 			Window.RequestFeature(WindowFeatures.NoTitle);
 
 			SfChart chart = new SfChart(this);
-			chart.Title.Text ="Contratista: " + nombre_contratista;
+			chart.Title.Text ="CONTRATISTA: " + nombre_contratista;
+			chart.Title.Typeface =  Typeface.DefaultBold;
 			chart.SetBackgroundColor(Color.White);
 
 			ChartZoomPanBehavior zoomPanBehavior = new ChartZoomPanBehavior();
@@ -64,7 +65,6 @@ namespace consulta_Ejecutiva.Actividades
 
 			//Inicializando Semanas 
 			CategoryAxis primaryAxis = new CategoryAxis();
-			//primaryAxis.Title.Text = "Semanas";
 			chart.PrimaryAxis = primaryAxis;
 
 			//scroll
@@ -87,9 +87,8 @@ namespace consulta_Ejecutiva.Actividades
 				{
 					Data2.Add(new ChartData { Name = "Semana " + semanas.SEMANA, Height = semanas.LONGITUD_ASIGNADA });
 					Data3.Add(new ChartData { Name = "Semana " + semanas.SEMANA, Height = semanas.LONGITUD_PATRULLADA });
-					//chart.Legend.Title.Text = "Año "+ semanas.ANHO;
+					chart.Legend.Title.Text = "Año "+ semanas.ANHO;
 					primaryAxis.Title.Text = "Semanas";
-					//semananas = "Semanas";
 				}
 			}
 			else if (cantidad_meses == "6"  || cantidad_meses =="12")
@@ -131,16 +130,7 @@ namespace consulta_Ejecutiva.Actividades
 			series.SelectedDataPointColor = Color.Red;
 			//series.Color = Color.Black;
 
-
-
 			chart.Series.Add(seriesBar);
-			chart.Legend.Title.Text = "Año ";
-			chart.Legend.LabelStyle.MarginBottom = 5;
-			chart.Legend.LabelStyle.MarginLeft = 5;
-			chart.Legend.LabelStyle.MarginRight = 5;
-			chart.Legend.LabelStyle.MarginTop = 5;
-			//chart.ColorModel.ColorPalette = ChartColorPalette.Custom;
-			//chart.ColorModel.CustomColors = colors;
 			chart.Series.Add(series);
 			chart.Legend.Visibility = Visibility.Visible;
 			SetContentView(chart);

@@ -77,23 +77,6 @@
 		android:gravity="center"
 		android:weightSum="1.0" >
 
-		<LinearLayout 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" 
-			android:layout_gravity="center"
-			android:orientation="vertical" >
-		<RadioButton
-			android:id="@+id/rbtnOSL"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="ORDENES SIN LEGALIZAR" />
-
-		<RadioButton
-			android:id="@+id/rbtnTLO" 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="TODAS LAS ORDENES" />
-		</LinearLayout>
 	</LinearLayout>
 	
 	<LinearLayout   
@@ -102,13 +85,6 @@
 		android:layout_marginTop="45dp"
 		android:gravity="center"
 		android:weightSum="1.0" >
-		<android.support.design.widget.FloatingActionButton 
-			android:id="@+id/fabDonutChart" 
-			android:layout_width="100dp" 
-			android:layout_height="100dp"
-			android:layout_margin="10dp"
-			android:backgroundTint="#4CAF50"
-			android:src="@drawable/logo_donutchart" />
 			
 		<android.support.design.widget.FloatingActionButton 
 			android:id="@+id/fabBarChart" 

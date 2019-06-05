@@ -28,6 +28,7 @@ namespace consulta_Ejecutiva.Actividades
 		private string cantidad_meses;
 		private string nombre_contratista;
 
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -40,9 +41,22 @@ namespace consulta_Ejecutiva.Actividades
 		}
 
 		private async void GetDataBarChart()
-		{
-			string urlBarChart = URLs.ConMes1 + cod_contratista + URLs.ConMes1y1 + cantidad_meses;
-			var resultado = await urlBarChart.GetRequest<List<TABLA_MES1>>();
+		{    // url para el boton de 1 mes
+			
+
+				string urlBarChart = URLs.ConMes1 + cod_contratista + URLs.ConMes1y1 + cantidad_meses;
+				var resultado = await urlBarChart.GetRequest<List<TABLA_MES1>>();
+			
+			
+				// url para el boton de 6 meses
+				string urlBarcharMeses = URLs.ConMeses6 + cod_contratista + URLs.ConMeses6y1 + cantidad_meses;
+				var resultadoBtnMeses = await urlBarcharMeses.GetRequest<List<TABLA_MESES>>();
+			
+				//url para el boton de 1 año
+
+				string urlBarcharAño = URLs.ConMeses12 + cod_contratista + URLs.ConMeses6y1 + cantidad_meses;
+				var resultadoBtnAños = await urlBarcharAño.GetRequest<List<TABLA_MESES>>();
+			
 			
 
 			Window.RequestFeature(WindowFeatures.NoTitle);
@@ -54,44 +68,71 @@ namespace consulta_Ejecutiva.Actividades
 			chart.Title.Text = "Contratista";
 			chart.SetBackgroundColor(Color.White);
 
+			ChartZoomPanBehavior zoomPanBehavior = new ChartZoomPanBehavior();
+			chart.Behaviors.Add(zoomPanBehavior);
+			zoomPanBehavior.ZoomMode = ZoomMode.X;
+			zoomPanBehavior.SelectionZoomingEnabled = true;
+
 			//Inicializando Semanas 
 			CategoryAxis primaryAxis = new CategoryAxis();
 			primaryAxis.Title.Text = "Semanas";
 			chart.PrimaryAxis = primaryAxis;
 
+			//scroll
+			//chart.PrimaryAxis = new CategoryAxis()
+			//{
+			//	AutoScrollingDelta = 6,
+
+			//	AutoScrollingMode = ChartAutoScrollingMode.Start
+			//};
+
 			//Inicializando Longitud 
 			NumericalAxis secondaryAxis = new NumericalAxis();
 			secondaryAxis.Title.Text = "Longitud  (mt) ";
 			chart.SecondaryAxis = secondaryAxis;
+		
+
 			if (cantidad_meses == "4")
 			{
 				for (int i = 0; i < 4; i++)
 				{
-					Data2.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_ASIGNADA });
-
-					Data3.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_PATRULLADA });
+					Data2.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA, Height = resultado[i].LONGITUD_ASIGNADA });
+					Data3.Add(new ChartData { Name = "Semana " + resultado[i].SEMANA, Height = resultado[i].LONGITUD_PATRULLADA });
+					chart.Legend.Title.Text = "Año " + resultado[i].ANHO;
 				}
 			}
 			else if (cantidad_meses == "6")
 			{
-				for (int i = 0; i < 7; i++)
+				for (int i = 0; i < 6; i++)
 				{
-					Data2.Add(new ChartData { Name = "Mes " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_ASIGNADA });
-
-					Data3.Add(new ChartData { Name = "Mes " + resultado[i].SEMANA + "/" + resultado[i].ANHO, Height = resultado[i].LONGITUD_PATRULLADA });
+					Data2.Add(new ChartData { Name = "Mes " + resultadoBtnMeses[i].MES, Height = resultadoBtnMeses[i].LONGITUD_ASIGNADA });
+					Data3.Add(new ChartData { Name = "Mes " + resultadoBtnMeses[i].MES, Height = resultadoBtnMeses[i].LONGITUD_PATRULLADA });
+					chart.Legend.Title.Text = "Año " + resultadoBtnMeses[i].ANHO;
 				}
 
+			}
+			else if (cantidad_meses == "12")
+			{
+				for (int i = 0; i < 12; i++)
+				{
+					Data2.Add(new ChartData { Name = "Mes " + resultadoBtnAños[i].MES , Height = resultadoBtnAños[i].LONGITUD_ASIGNADA });
+					Data3.Add(new ChartData { Name = "Mes " + resultadoBtnAños[i].MES , Height = resultadoBtnAños[i].LONGITUD_PATRULLADA });
 				}
-				ColumnSeries seriesBar = new ColumnSeries();
+
+			}
+			ColumnSeries seriesBar = new ColumnSeries();
 			seriesBar.ItemsSource = Data2;
 			seriesBar.XBindingPath = "Name";
 			seriesBar.YBindingPath = "Height";
 			seriesBar.Label = "Longitud Asignada";
-			seriesBar.DataMarker.ShowLabel = true;
+			// muestra los  valores que contiene la grafica
+			//seriesBar.DataMarker.ShowLabel = true;
 			seriesBar.TooltipEnabled = true;
-			//seriesBar.Color = Color.Blue;
-			var colors = new List<Color>();
-			colors.Add(Color.ParseColor("#ffffff"));
+			seriesBar.DataPointSelectionEnabled = true;
+			//seriesBar.SelectedDataPointIndex = 2;
+			seriesBar.SelectedDataPointColor = Color.Red;
+			//	var colors = new List<Color>();
+			//	colors.Add(Color.ParseColor("#094AC3"));
 
 
 			ColumnSeries series = new ColumnSeries();
@@ -99,15 +140,18 @@ namespace consulta_Ejecutiva.Actividades
 			series.XBindingPath = "Name";
 			series.YBindingPath = "Height";
 			series.Label = "Longitud Patrullada";
-			series.DataMarker.ShowLabel = true;
+			//series.DataMarker.ShowLabel = true;
 			series.TooltipEnabled = true;
-			series.Color = Color.Black;
-			
+			series.DataPointSelectionEnabled = true;
+			//series.SelectedDataPointIndex = 2;
+			series.SelectedDataPointColor = Color.Red;
+			//series.Color = Color.Black;
+
 
 
 			chart.Series.Add(seriesBar);
-			chart.ColorModel.ColorPalette = ChartColorPalette.Custom;
-			chart.ColorModel.CustomColors = colors;
+			//chart.ColorModel.ColorPalette = ChartColorPalette.Custom;
+			//chart.ColorModel.CustomColors = colors;
 			chart.Series.Add(series);
 			chart.Legend.Visibility = Visibility.Visible;
 			SetContentView(chart);

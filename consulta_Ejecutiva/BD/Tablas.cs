@@ -225,4 +225,93 @@ namespace consulta_Ejecutiva.BD
 
     }
 
+    [Table("TABLA_DEPARTAMENTO_MESES")]
+    public class TABLA_DEPARTAMENTO_MESES
+    {
+        private string m_NOM_CONTRATISTA;
+        public string NOM_CONTRATISTA
+        {
+
+            get
+            {
+                return m_NOM_CONTRATISTA;
+            }
+            set
+            {
+                this.m_NOM_CONTRATISTA = value;
+            }
+        }
+
+        private int m_UNIDADOPERATIVA;
+        public int UNIDADOPERATIVA
+        {
+
+            get
+            {
+                return m_UNIDADOPERATIVA;
+            }
+            set
+            {
+                this.m_UNIDADOPERATIVA = value;
+            }
+        }
+
+        private double m_LONGITUD_ASIGNADA;
+        public double LONGITUD_ASIGNADA
+        {
+
+            get
+            {
+                return m_LONGITUD_ASIGNADA;
+            }
+            set
+            {
+                this.m_LONGITUD_ASIGNADA = value;
+            }
+        }
+
+        private double m_LONGITUD_PATRULLADA;
+        public double LONGITUD_PATRULLADA
+        {
+
+            get
+            {
+                return m_LONGITUD_PATRULLADA;
+            }
+            set
+            {
+                this.m_LONGITUD_PATRULLADA = value;
+            }
+        }
+
+        private int m_SEMANA;
+        public int SEMANA
+        {
+
+            get
+            {
+                return m_SEMANA;
+            }
+            set
+            {
+                this.m_SEMANA = value;
+            }
+        }
+
+        private int m_ANHO;
+        public int ANHO
+        {
+
+            get
+            {
+                return m_ANHO;
+            }
+            set
+            {
+                this.m_ANHO = value;
+            }
+        }
+
+    }
+
 }

@@ -191,7 +191,7 @@ namespace consulta_Ejecutiva.Actividades
 
                 List<string> ListaContratista = new List<string>();
                 ConKey = new List<KeyValuePair<string, string>>();
-                ConKey.Add(new KeyValuePair<string, string>("0", "--SELECCIONE UNIDAD OPERATIVA--"));
+                ConKey.Add(new KeyValuePair<string, string>("0", "--SELECCIONE CONTRATISTA--"));
 
                 foreach (var contratista in result)
                 {
@@ -283,7 +283,7 @@ namespace consulta_Ejecutiva.Actividades
                 }
                 else if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon == 0)
                 {
-                    var intent = new Intent(this, typeof(Act_LineChart));
+                    var intent = new Intent(this, typeof(Act_Grafico_BarChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Unidad");
                     intent.PutExtra("Mes", Mes);

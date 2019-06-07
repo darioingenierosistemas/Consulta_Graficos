@@ -57,6 +57,7 @@ namespace consulta_Ejecutiva.Actividades
 			chart.Title.Text ="CONTRATISTA: " + nombre_contratista;
 			chart.Title.Typeface =  Typeface.DefaultBold;
 			chart.SetBackgroundColor(Color.White);
+			
 
 			ChartZoomPanBehavior zoomPanBehavior = new ChartZoomPanBehavior();
 			chart.Behaviors.Add(zoomPanBehavior);
@@ -104,21 +105,23 @@ namespace consulta_Ejecutiva.Actividades
 			seriesBar.TooltipEnabled = true;
 			seriesBar.DataPointSelectionEnabled = true;
 			seriesBar.SelectedDataPointColor = Color.Red;
-			//	var colors = new List<Color>();
-			//	colors.Add(Color.ParseColor("#094AC3"));
+		
+			
+
 
 			ColumnSeries series = new ColumnSeries();
 			series.ItemsSource = Data3;
 			series.XBindingPath = "Name";
 			series.YBindingPath = "Height";
 			series.Label = "Longitud Patrullada";
-			//series.DataMarker.ShowLabel = true;
 			series.TooltipEnabled = true;
 			series.DataPointSelectionEnabled = true;
-			//series.SelectedDataPointIndex = 2;
 			series.SelectedDataPointColor = Color.Red;
-			//series.Color = Color.Black;
 
+			// probando esto
+			chart.SideBySideSeriesPlacement = true;
+
+			chart.Enabled = true;
 			chart.Series.Add(seriesBar);
 			chart.Series.Add(series);
 			chart.Legend.Visibility = Visibility.Visible;
@@ -132,6 +135,7 @@ namespace consulta_Ejecutiva.Actividades
 		public string Name { get; set; }
 
 		public double Height { get; set; }
+	
 	}
 
 

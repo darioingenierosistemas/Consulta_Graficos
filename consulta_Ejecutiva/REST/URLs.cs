@@ -20,10 +20,15 @@ namespace consulta_Ejecutiva.REST
         public static string ConMes1 = "http://testlab.g-gis.com:80/Rest_Ejecutivo/ejecutiva/consulta/ConsultaMes1/?CodContratista=";
         public static string ConMeses6 = "http://testlab.g-gis.com:80/Rest_Ejecutivo/ejecutiva/consulta/ConsultaMeses6/?CodContratista=";
         public static string ConMeses12 = "http://testlab.g-gis.com:80/Rest_Ejecutivo/ejecutiva/consulta/ConsultaMeses12/?CodContratista=";
-        public static string ConMesDep = "http://testlab.g-gis.com:80/Rest_Ejecutivo/ejecutiva/consulta/ConsultaDepartamentoMeses/?CodDepartamento=";
+        public static string ConLonDep = "http://testlab.g-gis.com:80/Rest_Ejecutivo/ejecutiva/consulta/LongitudAsigDepartamento/?CodDepartamento=";
+        public static string ConLonDepMes = "http://testlab.g-gis.com:80/Rest_Ejecutivo/ejecutiva/consulta/LongitudAsigDepartamentoMes/?CodDepartamento=";
+        public static string ConLonUniSem = "http://testlab.g-gis.com:80/Rest_Ejecutivo/ejecutiva/consulta/LongitudUnidadSemana/?CodUnidadOperativa=";
+
         public static string ConMes1y1 = "&mes=";
         public static string ConMeses6y1 = "&meses=";
-        public static string ConMeses12y1 = "&meses=";
-        public static string ConMesDepy1 = "&meses=";
+        public static string ConMeses12y1 = "&meses="; 
+        public static string ConLonDepy1 = "&semanas=";
+        public static string ConLonDepMesy1 = "&meses=";
+        public static string ConLonUniSemy1 = "&semanas=";
     }
 }

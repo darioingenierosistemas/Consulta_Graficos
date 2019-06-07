@@ -24,6 +24,7 @@ namespace consulta_Ejecutiva.Actividades
         private string nomContratista;
         private string mes;
         private int anho;
+        private string semMes;
         ObservableCollection<ChartData> Data = new ObservableCollection<ChartData>();
         ObservableCollection<ChartData> Data2 = new ObservableCollection<ChartData>();
 
@@ -54,6 +55,7 @@ namespace consulta_Ejecutiva.Actividades
                         anho = datos.ANHO;
                     }
 
+                    semMes = "Semanas";
                     CreateLineChart();
                 }
                 else if (mes == "6")
@@ -63,11 +65,12 @@ namespace consulta_Ejecutiva.Actividades
 
                     foreach (var datos in resultado)
                     {
-                        Data.Add(new ChartData { Semanas = "Semana " + datos.MES, LongPatrullada = datos.LONGITUD_PATRULLADA });
-                        Data2.Add(new ChartData { Semanas = "Semana " + datos.MES, LongPatrullada = datos.LONGITUD_ASIGNADA });
+                        Data.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_PATRULLADA });
+                        Data2.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_ASIGNADA });
                         anho = datos.ANHO;
                     }
 
+                    semMes = "Meses";
                     CreateLineChart();
                 }
                 else if (mes == "12")
@@ -77,11 +80,12 @@ namespace consulta_Ejecutiva.Actividades
 
                     foreach (var datos in resultado)
                     {
-                        Data.Add(new ChartData { Semanas = "Semana " + datos.MES, LongPatrullada = datos.LONGITUD_PATRULLADA });
-                        Data2.Add(new ChartData { Semanas = "Semana " + datos.MES, LongPatrullada = datos.LONGITUD_ASIGNADA });
+                        Data.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_PATRULLADA });
+                        Data2.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_ASIGNADA });
                         anho = datos.ANHO;
                     }
 
+                    semMes = "Meses";
                     CreateLineChart();
                 }
             }
@@ -98,7 +102,7 @@ namespace consulta_Ejecutiva.Actividades
             chart.Title.Typeface = Typeface.DefaultBold;
 
             CategoryAxis primaryAxis = new CategoryAxis();
-            primaryAxis.Title.Text = "Semanas";
+            primaryAxis.Title.Text = semMes;
             chart.PrimaryAxis = primaryAxis;
             chart.PrimaryAxis.EdgeLabelsDrawingMode = EdgeLabelsDrawingMode.Shift;
             chart.PrimaryAxis.LabelsIntersectAction = AxisLabelsIntersectAction.MultipleRows;
@@ -127,10 +131,13 @@ namespace consulta_Ejecutiva.Actividades
             lineSeries2.DataMarker.ShowLabel = true;
             lineSeries2.TooltipEnabled = true;
 
-            chart.Series.Add(lineSeries);
             chart.Series.Add(lineSeries2);
+            chart.Series.Add(lineSeries);
             chart.Legend.Title.Text = "Año " + anho;
             chart.Legend.Visibility = Visibility.Visible;
+
+            ChartZoomPanBehavior zoomPanBehavior = new ChartZoomPanBehavior();
+            chart.Behaviors.Add(zoomPanBehavior);
 
             SetContentView(chart);
         }

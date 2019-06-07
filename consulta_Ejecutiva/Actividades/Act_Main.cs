@@ -27,13 +27,10 @@ namespace consulta_Ejecutiva.Actividades
 
         private ProgressDialog mProgress;
 
-        private string CodContratista;
-        private string NomContratista;
+        private string CodSelect;
+        private string Flag;
+        private string NomSelect;
         private string Mes;
-
-        private bool Bmes1 = false;
-        private bool Bmeses6 = false;
-        private bool Banho = false;
 
         private static CheckBox Mes1;
         private static CheckBox Meses6;
@@ -160,6 +157,10 @@ namespace consulta_Ejecutiva.Actividades
 
                 foreach (var unidad in result)
                 {
+                    if (string.IsNullOrEmpty(unidad.OPER_UNIT_CODE))
+                    {
+                        unidad.OPER_UNIT_CODE = unidad.OPERATING_UNIT_ID.ToString();
+                    }
                     UniKey.Add(new KeyValuePair<string, string>(unidad.OPERATING_UNIT_ID.ToString(), unidad.OPER_UNIT_CODE));
                 }
 
@@ -265,9 +266,28 @@ namespace consulta_Ejecutiva.Actividades
                 if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
                 {
                     var intent = new Intent(this, typeof(Act_Grafico_BarChart));
-                    intent.PutExtra("Contratista", CodContratista);
+                    intent.PutExtra("CodSelect", CodSelect);
+                    intent.PutExtra("Flag", "Contratista");
                     intent.PutExtra("Mes", Mes);
-                    intent.PutExtra("NomContratista", NomContratista);
+                    intent.PutExtra("NomSelect", NomSelect);
+                    StartActivity(intent);
+                }
+                else if (ItemPositionDep != 0 && ItemPositionUni == 0 && ItemPositionCon == 0)
+                {
+                    var intent = new Intent(this, typeof(Act_Grafico_BarChart));
+                    intent.PutExtra("CodSelect", CodSelect);
+                    intent.PutExtra("Flag", "Departamento");
+                    intent.PutExtra("Mes", Mes);
+                    intent.PutExtra("NomSelect", NomSelect);
+                    StartActivity(intent);
+                }
+                else if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon == 0)
+                {
+                    var intent = new Intent(this, typeof(Act_LineChart));
+                    intent.PutExtra("CodSelect", CodSelect);
+                    intent.PutExtra("Flag", "Unidad");
+                    intent.PutExtra("Mes", Mes);
+                    intent.PutExtra("NomSelect", NomSelect);
                     StartActivity(intent);
                 }
             }
@@ -280,8 +300,28 @@ namespace consulta_Ejecutiva.Actividades
                 if(ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
                 {
                     var intent = new Intent(this, typeof(Act_LineChart));
-                    intent.PutExtra("Contratista", CodContratista);
+                    intent.PutExtra("CodSelect", CodSelect);
+                    intent.PutExtra("Flag", "Contratista");
                     intent.PutExtra("Mes", Mes);
+                    intent.PutExtra("NomSelect", NomSelect);
+                    StartActivity(intent);
+                }
+                else if (ItemPositionDep != 0 && ItemPositionUni == 0 && ItemPositionCon == 0)
+                {
+                    var intent = new Intent(this, typeof(Act_LineChart));
+                    intent.PutExtra("CodSelect", CodSelect);
+                    intent.PutExtra("Flag", "Departamento");
+                    intent.PutExtra("Mes", Mes);
+                    intent.PutExtra("NomSelect", NomSelect);
+                    StartActivity(intent);
+                }
+                else if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon == 0)
+                {
+                    var intent = new Intent(this, typeof(Act_LineChart));
+                    intent.PutExtra("CodSelect", CodSelect);
+                    intent.PutExtra("Flag", "Unidad");
+                    intent.PutExtra("Mes", Mes);
+                    intent.PutExtra("NomSelect", NomSelect);
                     StartActivity(intent);
                 }
             }
@@ -296,6 +336,9 @@ namespace consulta_Ejecutiva.Actividades
             {
                 Spinner spinner = (Spinner)sender;
                 string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), DepKey[e.Position].Key);
+                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), DepKey[e.Position].Value);
+                CodSelect = toast;
+                NomSelect = toast1;
                 int cod = Convert.ToInt16(toast);
                 try
                 {
@@ -318,6 +361,9 @@ namespace consulta_Ejecutiva.Actividades
             {
                 Spinner spinner = (Spinner)sender;
                 string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), UniKey[e.Position].Key);
+                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), UniKey[e.Position].Value);
+                CodSelect = toast;
+                NomSelect = toast1;
                 int cod = Convert.ToInt16(toast);
 
                 try
@@ -342,9 +388,9 @@ namespace consulta_Ejecutiva.Actividades
             {
                 Spinner spinner = (Spinner)sender;
                 string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Key);
-                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Key);
-                CodContratista = toast;
-                NomContratista = toast1;
+                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Value);
+                CodSelect = toast;
+                NomSelect = toast1;
             }
         }
 

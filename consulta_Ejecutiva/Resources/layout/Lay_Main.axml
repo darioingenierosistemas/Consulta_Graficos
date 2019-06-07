@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
 
 	<LinearLayout
-		android:layout_width="fill_parent"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="15dp"
 		android:gravity="center"
@@ -43,46 +42,51 @@
 	</LinearLayout>
 	
 	<LinearLayout
-		android:layout_width="fill_parent"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="30dp"
-		android:paddingHorizontal="15dp"
+		android:paddingLeft="13dp"
+		android:paddingRight="13dp"
 		android:gravity="center" 
 		android:orientation="vertical" >
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" 
+			android:text="Departamento"
+			android:textAppearance="?android:attr/textAppearanceMedium" />
 		<Spinner
 			android:id="@+id/SpnDepartamento1"
-			android:layout_width="fill_parent"
+			android:layout_width="match_parent"
 			android:layout_height="50dp"
-			android:layout_marginBottom="5dp"
 			android:background="@android:drawable/btn_dropdown" />
 
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" 
+			android:text="Unidad Operativa"
+			android:textAppearance="?android:attr/textAppearanceMedium" />
 		<Spinner
 			android:id="@+id/SpnUnidadOperativa1"
-			android:layout_width="fill_parent"
+			android:layout_width="match_parent"
 			android:layout_height="50dp"
-			android:layout_marginBottom="5dp"
 			android:background="@android:drawable/btn_dropdown" />
 		
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" 
+			android:text="Contratista"
+			android:textAppearance="?android:attr/textAppearanceMedium" />
 		<Spinner
 			android:id="@+id/SpnContratista1"
-			android:layout_width="fill_parent"
+			android:layout_width="match_parent"
 			android:layout_height="50dp"
 			android:background="@android:drawable/btn_dropdown" />
-	</LinearLayout>
-
-	<LinearLayout   
-		android:layout_width="fill_parent" 
-		android:layout_height="wrap_content"
-		android:layout_marginTop="25dp"
-		android:gravity="center"
-		android:weightSum="1.0" >
-
 	</LinearLayout>
 	
 	<LinearLayout   
-		android:layout_width="fill_parent" 
+		android:layout_width="match_parent" 
 		android:layout_height="wrap_content"
-		android:layout_marginTop="45dp"
+		android:layout_marginTop="30dp"
 		android:gravity="center"
 		android:weightSum="1.0" >
 			

@@ -122,7 +122,7 @@ namespace consulta_Ejecutiva.Actividades
 					{
 						Data2.Add(new ChartData { Name = "Mes " + semanaDepmes.MES, Height = semanaDepmes.LONGITUD_ASIGNADA });
 						Data3.Add(new ChartData { Name = "Mes " + semanaDepmes.MES, Height = semanaDepmes.LONGITUD_PATRULLADA });
-						chart.Legend.Title.Text = "Año" + semanaDepmes.ANHO;
+						chart.Legend.Title.Text = "Año " + semanaDepmes.ANHO;
 						primaryAxis.Title.Text = "Meses";
 					}
 				}
@@ -152,7 +152,7 @@ namespace consulta_Ejecutiva.Actividades
 					{
 						Data2.Add(new ChartData { Name = "Mes " + semanaUniMes.MES, Height = semanaUniMes.LONGITUD_ASIGNADA });
 						Data3.Add(new ChartData { Name = "Mes " + semanaUniMes.MES, Height = semanaUniMes.LONGITUD_PATRULLADA });
-						chart.Legend.Title.Text = "Año" + semanaUniMes.ANHO;
+						chart.Legend.Title.Text = "Año " + semanaUniMes.ANHO;
 						primaryAxis.Title.Text = "Meses";
 					}
 				}

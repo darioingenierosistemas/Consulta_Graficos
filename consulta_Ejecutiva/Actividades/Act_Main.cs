@@ -104,6 +104,7 @@ namespace consulta_Ejecutiva.Actividades
             Departamentos.SetSelection(0, false);
             Departamentos.ItemSelected += Departamentos_ItemSelected;
 
+
             Unidad_Operativa = FindViewById<Spinner>(Resource.Id.SpnUnidadOperativa1);
             Unidad_Operativa.SetSelection(0, false);
             Unidad_Operativa.ItemSelected += Unidad_Operativa_ItemSelected;
@@ -352,7 +353,7 @@ namespace consulta_Ejecutiva.Actividades
 
             ItemPositionDep = Departamentos.SelectedItemPosition;
 
-            if (ItemPositionDep != 0 && ItemPositionUni == 0 && ItemPositionCon == 0)
+            if (ItemPositionDep != 0)
             {
                 Spinner spinner = (Spinner)sender;
                 string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), DepKey[e.Position].Key);
@@ -380,7 +381,7 @@ namespace consulta_Ejecutiva.Actividades
         {
 
             ItemPositionUni = Unidad_Operativa.SelectedItemPosition;
-            if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon == 0)
+            if (ItemPositionUni != 0)
             {
                 Spinner spinner = (Spinner)sender;
                 string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), UniKey[e.Position].Key);
@@ -410,7 +411,7 @@ namespace consulta_Ejecutiva.Actividades
         {
             
             ItemPositionCon = Contratista.SelectedItemPosition;
-            if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
+            if (ItemPositionCon != 0)
             {
                 Spinner spinner = (Spinner)sender;
                 string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Key);

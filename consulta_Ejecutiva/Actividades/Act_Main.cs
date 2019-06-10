@@ -32,6 +32,14 @@ namespace consulta_Ejecutiva.Actividades
         private string NomSelect;
         private string Mes;
 
+        private string CodSelectDep;
+        private string CodSelectUni;
+        private string CodSelectCon;
+
+        private string NomSelectDep;
+        private string NomSelectUni;
+        private string NomSelectCon;
+
         private static CheckBox Mes1;
         private static CheckBox Meses6;
         private static CheckBox Anho1;
@@ -95,6 +103,7 @@ namespace consulta_Ejecutiva.Actividades
             Departamentos = FindViewById<Spinner>(Resource.Id.SpnDepartamento1);
             Departamentos.SetSelection(0, false);
             Departamentos.ItemSelected += Departamentos_ItemSelected;
+
 
             Unidad_Operativa = FindViewById<Spinner>(Resource.Id.SpnUnidadOperativa1);
             Unidad_Operativa.SetSelection(0, false);
@@ -265,6 +274,8 @@ namespace consulta_Ejecutiva.Actividades
             {
                 if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
                 {
+                    CodSelect = CodSelectCon;
+                    NomSelect = NomSelectCon;
                     var intent = new Intent(this, typeof(Act_Grafico_BarChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Contratista");
@@ -274,6 +285,8 @@ namespace consulta_Ejecutiva.Actividades
                 }
                 else if (ItemPositionDep != 0 && ItemPositionUni == 0 && ItemPositionCon == 0)
                 {
+                    CodSelect = CodSelectDep;
+                    NomSelect = NomSelectDep;
                     var intent = new Intent(this, typeof(Act_Grafico_BarChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Departamento");
@@ -283,6 +296,8 @@ namespace consulta_Ejecutiva.Actividades
                 }
                 else if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon == 0)
                 {
+                    CodSelect = CodSelectUni;
+                    NomSelect = NomSelectUni;
                     var intent = new Intent(this, typeof(Act_Grafico_BarChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Unidad");
@@ -299,6 +314,8 @@ namespace consulta_Ejecutiva.Actividades
             { 
                 if(ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
                 {
+                    CodSelect = CodSelectCon;
+                    NomSelect = NomSelectCon;
                     var intent = new Intent(this, typeof(Act_LineChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Contratista");
@@ -308,6 +325,8 @@ namespace consulta_Ejecutiva.Actividades
                 }
                 else if (ItemPositionDep != 0 && ItemPositionUni == 0 && ItemPositionCon == 0)
                 {
+                    CodSelect = CodSelectDep;
+                    NomSelect = NomSelectDep;
                     var intent = new Intent(this, typeof(Act_LineChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Departamento");
@@ -317,6 +336,8 @@ namespace consulta_Ejecutiva.Actividades
                 }
                 else if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon == 0)
                 {
+                    CodSelect = CodSelectUni;
+                    NomSelect = NomSelectUni;
                     var intent = new Intent(this, typeof(Act_LineChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Unidad");
@@ -339,6 +360,8 @@ namespace consulta_Ejecutiva.Actividades
                 string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), DepKey[e.Position].Value);
                 CodSelect = toast;
                 NomSelect = toast1;
+                CodSelectDep = CodSelect;
+                NomSelectDep = NomSelect;
                 int cod = Convert.ToInt16(toast);
                 try
                 {
@@ -351,6 +374,7 @@ namespace consulta_Ejecutiva.Actividades
 
                 }
             }
+         
         }
 
         private void Unidad_Operativa_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -364,6 +388,8 @@ namespace consulta_Ejecutiva.Actividades
                 string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), UniKey[e.Position].Value);
                 CodSelect = toast;
                 NomSelect = toast1;
+                CodSelectUni = CodSelect;
+                NomSelectUni = NomSelect;
                 int cod = Convert.ToInt16(toast);
 
                 try
@@ -377,6 +403,7 @@ namespace consulta_Ejecutiva.Actividades
 
                 }
             }
+        
 
         }
 
@@ -391,8 +418,13 @@ namespace consulta_Ejecutiva.Actividades
                 string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Value);
                 CodSelect = toast;
                 NomSelect = toast1;
+                CodSelectCon = CodSelect;
+                NomSelectCon = NomSelect;
+
             }
+         
         }
+
 
     }
 }

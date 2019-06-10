@@ -305,6 +305,14 @@ namespace consulta_Ejecutiva.Actividades
                     intent.PutExtra("NomSelect", NomSelect);
                     StartActivity(intent);
                 }
+                else if (ItemPositionDep == 0)
+                {
+                    Toast.MakeText(ApplicationContext, "VERIFIQUE LOS CAMPOS SELECCIONADOS", ToastLength.Long).Show();
+                }
+            }
+            else if (Mes1.Checked == false || Meses6.Checked == false || Anho1.Checked == false)
+            {
+                Toast.MakeText(ApplicationContext, "VERIFIQUE EL MES SELECCIONADO", ToastLength.Long).Show();
             }
         }
 
@@ -345,6 +353,14 @@ namespace consulta_Ejecutiva.Actividades
                     intent.PutExtra("NomSelect", NomSelect);
                     StartActivity(intent);
                 }
+                else if (ItemPositionDep == 0)
+                {
+                    Toast.MakeText(ApplicationContext, "VERIFIQUE LOS CAMPOS SELECCIONADOS", ToastLength.Long).Show();
+                }
+            }
+            else if (Mes1.Checked == false || Meses6.Checked == false || Anho1.Checked == false)
+            {
+                Toast.MakeText(ApplicationContext, "VERIFIQUE EL MES SELECCIONADO", ToastLength.Long).Show();
             }
         }
 
@@ -366,6 +382,8 @@ namespace consulta_Ejecutiva.Actividades
                 try
                 {
                     PoblarSpinnerUni(cod);
+                    Contratista.SetSelection(0);
+                    Contratista.Enabled = false;
 
                 }
                 catch (Exception ex)
@@ -374,6 +392,7 @@ namespace consulta_Ejecutiva.Actividades
 
                 }
             }
+            
          
         }
 
@@ -395,6 +414,7 @@ namespace consulta_Ejecutiva.Actividades
                 try
                 {
                     PoblarSpinnerCon(cod);
+                    Contratista.Enabled = true;
 
                 }
                 catch (Exception ex)

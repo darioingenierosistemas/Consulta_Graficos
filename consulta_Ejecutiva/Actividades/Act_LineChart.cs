@@ -20,11 +20,14 @@ namespace consulta_Ejecutiva.Actividades
     [Activity(Label = "Act_LineChart")]
     public class Act_LineChart : Activity
     {
-        private string codContratista;
-        private string nomContratista;
+        private string codSelect;
+        private string nomSelect;
         private string mes;
+        private string flag;
+
         private int anho;
         private string semMes;
+
         ObservableCollection<ChartData> Data = new ObservableCollection<ChartData>();
         ObservableCollection<ChartData> Data2 = new ObservableCollection<ChartData>();
 
@@ -32,9 +35,10 @@ namespace consulta_Ejecutiva.Actividades
         {
             base.OnCreate(savedInstanceState);
 
-            codContratista = Intent.GetStringExtra("Contratista");
-            nomContratista = Intent.GetStringExtra("NomContratista");
+            codSelect = Intent.GetStringExtra("CodSelect");
+            nomSelect = Intent.GetStringExtra("NomSelect");
             mes = Intent.GetStringExtra("Mes");
+            flag = Intent.GetStringExtra("Flag");
 
             GetData();
         }
@@ -43,50 +47,109 @@ namespace consulta_Ejecutiva.Actividades
         {
             try
             {
-                if (mes == "4")
+                if (flag == "Departamento")
                 {
-                    string url = URLs.ConMes1 + codContratista + URLs.ConMes1y1 + mes;
-                    var resultado = await url.GetRequest<List<TABLA_MES1>>();
-
-                    foreach (var datos in resultado)
+                    if (mes == "4")
                     {
-                        Data.Add(new ChartData { Semanas = "Semana " + datos.SEMANA, LongPatrullada = datos.LONGITUD_PATRULLADA });
-                        Data2.Add(new ChartData { Semanas = "Semana " + datos.SEMANA, LongPatrullada = datos.LONGITUD_ASIGNADA });
-                        anho = datos.ANHO;
+                        string url = URLs.LonDepMes1 + codSelect + URLs.LonDepMes1y1 + mes;
+                        var resultado = await url.GetRequest<List<TABLA_MES1>>();
+
+                        foreach (var datos in resultado)
+                        {
+                            Data.Add(new ChartData { Semanas = "Semana " + datos.SEMANA, LongPatrullada = datos.LONGITUD_PATRULLADA });
+                            Data2.Add(new ChartData { Semanas = "Semana " + datos.SEMANA, LongPatrullada = datos.LONGITUD_ASIGNADA });
+                            anho = datos.ANHO;
+                        }
+
+                        semMes = "Semanas";
+                        CreateLineChart();
                     }
 
-                    semMes = "Semanas";
-                    CreateLineChart();
+                    else if (mes == "6" || mes == "12")
+                    {
+                        string url = URLs.LonDepMeses + codSelect + URLs.LonDepMesesy1 + mes;
+                        var resultado = await url.GetRequest<List<TABLA_MESES>>();
+
+                        foreach (var datos in resultado)
+                        {
+                            Data.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_PATRULLADA });
+                            Data2.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_ASIGNADA });
+                            anho = datos.ANHO;
+                        }
+
+                        semMes = "Meses";
+                        CreateLineChart();
+                    }
                 }
-                else if (mes == "6")
-                {
-                    string url = URLs.ConMeses6 + codContratista + URLs.ConMeses6y1 + mes;
-                    var resultado = await url.GetRequest<List<TABLA_MESES>>();
 
-                    foreach (var datos in resultado)
+                else if (flag == "Unidad")
+                {
+                    if (mes == "4")
                     {
-                        Data.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_PATRULLADA });
-                        Data2.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_ASIGNADA });
-                        anho = datos.ANHO;
+                        string url = URLs.LonUniMes1 + codSelect + URLs.LonUniMes1y1 + mes;
+                        var resultado = await url.GetRequest<List<TABLA_MES1>>();
+
+                        foreach (var datos in resultado)
+                        {
+                            Data.Add(new ChartData { Semanas = "Semana " + datos.SEMANA, LongPatrullada = datos.LONGITUD_PATRULLADA });
+                            Data2.Add(new ChartData { Semanas = "Semana " + datos.SEMANA, LongPatrullada = datos.LONGITUD_ASIGNADA });
+                            anho = datos.ANHO;
+                        }
+
+                        semMes = "Semanas";
+                        CreateLineChart();
                     }
 
-                    semMes = "Meses";
-                    CreateLineChart();
+                    else if (mes == "6" || mes == "12")
+                    {
+                        string url = URLs.LonUniMeses + codSelect + URLs.LonUniMesesy1 + mes;
+                        var resultado = await url.GetRequest<List<TABLA_MESES>>();
+
+                        foreach (var datos in resultado)
+                        {
+                            Data.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_PATRULLADA });
+                            Data2.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_ASIGNADA });
+                            anho = datos.ANHO;
+                        }
+
+                        semMes = "Meses";
+                        CreateLineChart();
+                    }
                 }
-                else if (mes == "12")
-                {
-                    string url = URLs.ConMeses12 + codContratista + URLs.ConMeses12y1 + mes;
-                    var resultado = await url.GetRequest<List<TABLA_MESES>>();
 
-                    foreach (var datos in resultado)
+                else if (flag == "Contratista")
+                {
+                    if (mes == "4")
                     {
-                        Data.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_PATRULLADA });
-                        Data2.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_ASIGNADA });
-                        anho = datos.ANHO;
+                        string url = URLs.ConMes1 + codSelect + URLs.ConMes1y1 + mes;
+                        var resultado = await url.GetRequest<List<TABLA_MES1>>();
+
+                        foreach (var datos in resultado)
+                        {
+                            Data.Add(new ChartData { Semanas = "Semana " + datos.SEMANA, LongPatrullada = datos.LONGITUD_PATRULLADA });
+                            Data2.Add(new ChartData { Semanas = "Semana " + datos.SEMANA, LongPatrullada = datos.LONGITUD_ASIGNADA });
+                            anho = datos.ANHO;
+                        }
+
+                        semMes = "Semanas";
+                        CreateLineChart();
                     }
 
-                    semMes = "Meses";
-                    CreateLineChart();
+                    else if (mes == "6" || mes == "12")
+                    {
+                        string url = URLs.ConMeses + codSelect + URLs.ConMesesy1 + mes;
+                        var resultado = await url.GetRequest<List<TABLA_MESES>>();
+
+                        foreach (var datos in resultado)
+                        {
+                            Data.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_PATRULLADA });
+                            Data2.Add(new ChartData { Semanas = "Mes " + datos.MES, LongPatrullada = datos.LONGITUD_ASIGNADA });
+                            anho = datos.ANHO;
+                        }
+
+                        semMes = "Meses";
+                        CreateLineChart();
+                    }
                 }
             }
             catch (Exception ex)
@@ -98,7 +161,14 @@ namespace consulta_Ejecutiva.Actividades
         private void CreateLineChart()
         {
             SfChart chart = new SfChart(this);
-            chart.Title.Text = "CONTRATISTA: " + nomContratista;
+            if (flag == "Unidad")
+            {
+                chart.Title.Text = flag.ToUpper() + " OPERATIVA: " + nomSelect;
+            }
+            else
+            {
+                chart.Title.Text = flag.ToUpper() + ": " + nomSelect;
+            }
             chart.Title.Typeface = Typeface.DefaultBold;
 
             CategoryAxis primaryAxis = new CategoryAxis();

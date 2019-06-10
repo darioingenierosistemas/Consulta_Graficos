@@ -32,6 +32,14 @@ namespace consulta_Ejecutiva.Actividades
         private string NomSelect;
         private string Mes;
 
+        private string CodSelectDep;
+        private string CodSelectUni;
+        private string CodSelectCon;
+
+        private string NomSelectDep;
+        private string NomSelectUni;
+        private string NomSelectCon;
+
         private static CheckBox Mes1;
         private static CheckBox Meses6;
         private static CheckBox Anho1;
@@ -265,6 +273,8 @@ namespace consulta_Ejecutiva.Actividades
             {
                 if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
                 {
+                    CodSelect = CodSelectCon;
+                    NomSelect = NomSelectCon;
                     var intent = new Intent(this, typeof(Act_Grafico_BarChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Contratista");
@@ -274,6 +284,8 @@ namespace consulta_Ejecutiva.Actividades
                 }
                 else if (ItemPositionDep != 0 && ItemPositionUni == 0 && ItemPositionCon == 0)
                 {
+                    CodSelect = CodSelectDep;
+                    NomSelect = NomSelectDep;
                     var intent = new Intent(this, typeof(Act_Grafico_BarChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Departamento");
@@ -283,6 +295,8 @@ namespace consulta_Ejecutiva.Actividades
                 }
                 else if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon == 0)
                 {
+                    CodSelect = CodSelectUni;
+                    NomSelect = NomSelectUni;
                     var intent = new Intent(this, typeof(Act_Grafico_BarChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Unidad");
@@ -299,6 +313,8 @@ namespace consulta_Ejecutiva.Actividades
             { 
                 if(ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
                 {
+                    CodSelect = CodSelectCon;
+                    NomSelect = NomSelectCon;
                     var intent = new Intent(this, typeof(Act_LineChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Contratista");
@@ -308,6 +324,8 @@ namespace consulta_Ejecutiva.Actividades
                 }
                 else if (ItemPositionDep != 0 && ItemPositionUni == 0 && ItemPositionCon == 0)
                 {
+                    CodSelect = CodSelectDep;
+                    NomSelect = NomSelectDep;
                     var intent = new Intent(this, typeof(Act_LineChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Departamento");
@@ -317,6 +335,8 @@ namespace consulta_Ejecutiva.Actividades
                 }
                 else if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon == 0)
                 {
+                    CodSelect = CodSelectUni;
+                    NomSelect = NomSelectUni;
                     var intent = new Intent(this, typeof(Act_LineChart));
                     intent.PutExtra("CodSelect", CodSelect);
                     intent.PutExtra("Flag", "Unidad");
@@ -332,13 +352,15 @@ namespace consulta_Ejecutiva.Actividades
 
             ItemPositionDep = Departamentos.SelectedItemPosition;
 
-            if (ItemPositionDep != 0)
+            if (ItemPositionDep != 0 && ItemPositionUni == 0 && ItemPositionCon == 0)
             {
                 Spinner spinner = (Spinner)sender;
                 string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), DepKey[e.Position].Key);
                 string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), DepKey[e.Position].Value);
                 CodSelect = toast;
                 NomSelect = toast1;
+                CodSelectDep = CodSelect;
+                NomSelectDep = NomSelect;
                 int cod = Convert.ToInt16(toast);
                 try
                 {
@@ -351,23 +373,22 @@ namespace consulta_Ejecutiva.Actividades
 
                 }
             }
-            else if (ItemPositionDep == 0)
-            {
-                SeleccionSpinner(sender, e);
-            }
+         
         }
 
         private void Unidad_Operativa_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
 
             ItemPositionUni = Unidad_Operativa.SelectedItemPosition;
-            if (ItemPositionUni != 0)
+            if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon == 0)
             {
                 Spinner spinner = (Spinner)sender;
                 string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), UniKey[e.Position].Key);
                 string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), UniKey[e.Position].Value);
                 CodSelect = toast;
                 NomSelect = toast1;
+                CodSelectUni = CodSelect;
+                NomSelectUni = NomSelect;
                 int cod = Convert.ToInt16(toast);
 
                 try
@@ -381,10 +402,7 @@ namespace consulta_Ejecutiva.Actividades
 
                 }
             }
-            else if (ItemPositionUni == 0)
-            {
-                SeleccionSpinner(sender, e);
-            }
+        
 
         }
 
@@ -392,53 +410,20 @@ namespace consulta_Ejecutiva.Actividades
         {
             
             ItemPositionCon = Contratista.SelectedItemPosition;
-            if (ItemPositionCon != 0)
+            if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
             {
                 Spinner spinner = (Spinner)sender;
                 string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Key);
                 string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Value);
                 CodSelect = toast;
                 NomSelect = toast1;
+                CodSelectCon = CodSelect;
+                NomSelectCon = NomSelect;
+
             }
-            else if (ItemPositionCon == 0)
-            {
-                SeleccionSpinner(sender, e);
-            }
+         
         }
 
-        private void SeleccionSpinner(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            Spinner spinner = (Spinner)sender;
-
-            if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
-            {              
-                string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Key);
-                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Value);
-                CodSelect = toast;
-                NomSelect = toast1;
-
-            }
-            else if (ItemPositionDep != 0 && ItemPositionUni == 0 && ItemPositionCon == 0)
-            {
-
-                string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), DepKey[e.Position].Key);
-                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), DepKey[e.Position].Value);
-                CodSelect = toast;
-                NomSelect = toast1;
-
-            }
-            else if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon == 0)
-            {
-
-                string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), UniKey[e.Position].Key);
-                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), UniKey[e.Position].Value);
-                CodSelect = toast;
-                NomSelect = toast1;
-
-            }
-
-
-        }
 
     }
 }

@@ -351,6 +351,10 @@ namespace consulta_Ejecutiva.Actividades
 
                 }
             }
+            else if (ItemPositionDep == 0)
+            {
+                SeleccionSpinner(sender, e);
+            }
         }
 
         private void Unidad_Operativa_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -377,6 +381,10 @@ namespace consulta_Ejecutiva.Actividades
 
                 }
             }
+            else if (ItemPositionUni == 0)
+            {
+                SeleccionSpinner(sender, e);
+            }
 
         }
 
@@ -392,6 +400,44 @@ namespace consulta_Ejecutiva.Actividades
                 CodSelect = toast;
                 NomSelect = toast1;
             }
+            else if (ItemPositionCon == 0)
+            {
+                SeleccionSpinner(sender, e);
+            }
+        }
+
+        private void SeleccionSpinner(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Spinner spinner = (Spinner)sender;
+
+            if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon != 0)
+            {              
+                string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Key);
+                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), ConKey[e.Position].Value);
+                CodSelect = toast;
+                NomSelect = toast1;
+
+            }
+            else if (ItemPositionDep != 0 && ItemPositionUni == 0 && ItemPositionCon == 0)
+            {
+
+                string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), DepKey[e.Position].Key);
+                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), DepKey[e.Position].Value);
+                CodSelect = toast;
+                NomSelect = toast1;
+
+            }
+            else if (ItemPositionDep != 0 && ItemPositionUni != 0 && ItemPositionCon == 0)
+            {
+
+                string toast = string.Format("{1}", spinner.GetItemAtPosition(e.Position), UniKey[e.Position].Key);
+                string toast1 = string.Format("{0}", spinner.GetItemAtPosition(e.Position), UniKey[e.Position].Value);
+                CodSelect = toast;
+                NomSelect = toast1;
+
+            }
+
+
         }
 
     }

@@ -29,6 +29,9 @@ namespace consulta_Ejecutiva
 
             Button btnLogin = FindViewById<Button>(Resource.Id.btnLogin);
             CheckBox chkMostar = FindViewById<CheckBox>(Resource.Id.chkMostrar);
+            EditText edtPass = FindViewById<EditText>(Resource.Id.edtPass);
+            edtPass.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText | InputTypes.TextVariationNormal;
+
             btnLogin.Click += BtnLogin_Click;
             chkMostar.CheckedChange += ChkMostar_CheckedChange;
 
@@ -42,12 +45,12 @@ namespace consulta_Ejecutiva
 
             if (chkMostar.Checked == true)
             {
-                edtPass.InputType = InputTypes.TextVariationVisiblePassword;
+                edtPass.InputType = InputTypes.TextVariationVisiblePassword | InputTypes.ClassText | InputTypes.TextVariationNormal;
             }
             else if (chkMostar.Checked == false)
             {
 
-                edtPass.InputType = InputTypes.TextVariationPassword | InputTypes.TextVariationNormal;
+                edtPass.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText | InputTypes.TextVariationNormal;
             }
             edtPass.RequestFocus();
         }

@@ -2327,7 +2327,7 @@ namespace consulta_Ejecutiva
 			public const int Gases_Animacion = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int IconoLetras = 2130837598;
+			public const int IconoLetrasOscuras = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
 			public const int iconoMovil = 2130837599;

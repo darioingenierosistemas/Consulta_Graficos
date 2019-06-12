@@ -47,7 +47,7 @@ namespace consulta_Ejecutiva
             else if (chkMostar.Checked == false)
             {
 
-                edtPass.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+                edtPass.InputType = InputTypes.TextVariationPassword | InputTypes.TextVariationNormal;
             }
             edtPass.RequestFocus();
         }
@@ -65,7 +65,7 @@ namespace consulta_Ejecutiva
             {
                 AlertDialog.Builder alertDiag = new AlertDialog.Builder(this);
                 alertDiag.SetTitle("ERROR");
-                alertDiag.SetMessage("Los Campos de USER y PASSWORD no pueden estas vacios");
+                alertDiag.SetMessage("Los campos de USER y PASSWORD no pueden estas vacíos");
                 alertDiag.SetNegativeButton("OK", (senderAlert, args) => {
                 });
                 Dialog diag = alertDiag.Create();
@@ -100,7 +100,7 @@ namespace consulta_Ejecutiva
                 {
                     mProgress.Dismiss();
                     AlertDialog.Builder alertDiag = new AlertDialog.Builder(this);
-                    alertDiag.SetTitle("ERROR!");
+                    alertDiag.SetTitle("ERROR");
                     alertDiag.SetMessage("Usuario o Constraseña invalida");
                     alertDiag.SetPositiveButton("OK", (senderAlert, args) =>
                     {
@@ -171,7 +171,7 @@ namespace consulta_Ejecutiva
             {
                 //set alert for executing the task
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.SetTitle("Permiso Neecesitado");
+                alert.SetTitle("Permiso Necesitado");
                 alert.SetMessage("La Aplicacion necesita un permiso espcial para continuar");
                 alert.SetPositiveButton("Pedir Permiso", (senderAlert, args) =>
                 {

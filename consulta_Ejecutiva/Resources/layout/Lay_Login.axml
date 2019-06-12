@@ -1,71 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	android:background="#5499C7">
-	>
+	
+	android:gravity="center_horizontal"
+    android:orientation="vertical" >
 
 	<ImageView 
-	 	 android:src="@drawable/iconoLetras"
-		 android:layout_marginTop="20dp"
-		 android:layout_width="400dp"
-         android:layout_height="120dp"
-	     android:padding="5dp"
-		 />
+		android:layout_width="wrap_content"
+		android:layout_height="120dp"
+	 	android:src="@drawable/iconoLetras"
+		android:layout_marginTop="40dp"
+		android:layout_marginBottom="50dp" />
 
 	<LinearLayout
-		android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+		android:layout_width="match_parent"
+        android:layout_height="wrap_content"        
         android:layout_margin="10dp"
-        android:orientation="vertical"
-		>
-		<EditText
-		android:id="@+id/edtUser"
-		android:hint="USER"
-		android:textColor ="@android:color/black"
-		android:background="@drawable/Estilo_Edittext"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:padding="5dp"
-	    android:layout_marginTop="10dp"
-		/>
+        android:orientation="vertical" >
 
 		<EditText
-		android:id="@+id/edtPass"
-		android:hint="PASSWORD"
-		android:textColor ="@android:color/black"
-		android:background="@drawable/Estilo_Edittext"
-		 android:inputType="textPassword"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:padding="5dp"
-	    android:layout_marginTop="10dp" />
+			android:id="@+id/edtUser"
+			android:layout_width="match_parent"
+			android:layout_height="45dp"
+			android:hint="USER"
+			android:textColor ="@android:color/black"
+			android:background="@drawable/Estilo_Edittext"
+			android:layout_marginBottom="10dp"/>
+
+		<EditText
+			android:id="@+id/edtPass"
+			android:layout_width="match_parent"
+			android:layout_height="45dp"
+			android:hint="PASSWORD"
+			android:textColor ="@android:color/black"
+			android:background="@drawable/Estilo_Edittext"
+			android:inputType="textPassword"
+			android:layout_marginBottom="10dp" />
 
 		<CheckBox 
-		 android:id="@+id/chkMostrar"
-		 android:textColor="@android:color/white"
-		 android:textStyle="bold"
-		 android:buttonTint="@color/colorPrimary"
-	     android:text="MOSTRAR CONTRASEÑA"
-		 android:layout_width="match_parent"
-         android:layout_height="45dp"
-		 android:layout_marginTop="20dp"
-         android:layout_gravity="right" />
-
+			android:id="@+id/chkMostrar"
+			android:layout_width="match_parent"
+			android:layout_height="45dp"
+			android:text="MOSTRAR CONTRASEÑA"
+			android:textStyle="bold"
+			android:textColor="@android:color/white"
+			android:buttonTint="@color/colorPrimary"
+			android:layout_marginBottom="30dp" />
 
 		<Button
-		 android:id="@+id/btnLogin"
-		 android:text="LOGIN" 
-		 android:layout_width="match_parent"
-         android:layout_height="45dp"
-		 android:background="@color/colorPrimary"
-         android:textColor="@android:color/white"
-         android:layout_marginTop="20dp"
-         android:layout_gravity="right" />
-
-
+			android:id="@+id/btnLogin"
+			android:layout_width="match_parent"
+			android:layout_height="45dp"
+			android:text="LOGIN" 
+			android:textColor="@android:color/white"
+			android:background="@color/colorPrimary" />
 	</LinearLayout>
-</RelativeLayout>
+</LinearLayout>

@@ -167,8 +167,8 @@ namespace consulta_Ejecutiva.Actividades
 			// muestra los  valores que contiene la grafica
 			//seriesBar.DataMarker.ShowLabel = true;
 			seriesBar.TooltipEnabled = true;
-			seriesBar.DataPointSelectionEnabled = true;
-			seriesBar.SelectedDataPointColor = Color.Red;
+			
+			
 
 
 
@@ -179,8 +179,8 @@ namespace consulta_Ejecutiva.Actividades
 			series.YBindingPath = "Height";
 			series.Label = "Longitud Patrullada";
 			series.TooltipEnabled = true;
-			series.DataPointSelectionEnabled = true;
-			series.SelectedDataPointColor = Color.Red;
+			
+			
 
 			// probando esto
 			chart.SideBySideSeriesPlacement = true;

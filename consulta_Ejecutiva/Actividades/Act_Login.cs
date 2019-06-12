@@ -6,22 +6,127 @@ using Android.Widget;
 using Android;
 using System.Threading.Tasks;
 using AlertDialog = Android.App.AlertDialog;
+using Android.Text;
+using System;
+using consulta_Ejecutiva.Actividades;
+using consulta_Ejecutiva.REST;
+using consulta_Ejecutiva.BD;
 
 namespace consulta_Ejecutiva
 {
-    [Activity(Label = "LOGIN", Theme = "@style/AppTheme"
-        //, MainLauncher = true
+    [Activity(Label = "CONSULTA EJECUTIVA", Theme = "@style/AppTheme"
+        , MainLauncher = true
         )]
     public class Act_Login : AppCompatActivity
     {
+        private ProgressDialog mProgress;
+
         protected  override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Lay_Login);
             //await TryToGetPermissions();
+
+            Button btnLogin = FindViewById<Button>(Resource.Id.btnLogin);
+            CheckBox chkMostar = FindViewById<CheckBox>(Resource.Id.chkMostrar);
+            btnLogin.Click += BtnLogin_Click;
+            chkMostar.CheckedChange += ChkMostar_CheckedChange;
+
         }
 
+
+        private void ChkMostar_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            CheckBox chkMostar = FindViewById<CheckBox>(Resource.Id.chkMostrar);
+            EditText edtPass = FindViewById<EditText>(Resource.Id.edtPass);
+
+            if (chkMostar.Checked == true)
+            {
+                edtPass.InputType = InputTypes.TextVariationVisiblePassword;
+            }
+            else if (chkMostar.Checked == false)
+            {
+
+                edtPass.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+            }
+            edtPass.RequestFocus();
+        }
+
+        private void BtnLogin_Click(object sender, EventArgs e)
+        {
+
+            EditText edtUser = FindViewById<EditText>(Resource.Id.edtUser);
+            EditText edtPass = FindViewById<EditText>(Resource.Id.edtPass);
+            if (!string.IsNullOrEmpty(edtUser.Text.ToString()) && !string.IsNullOrEmpty(edtPass.Text.ToString()))
+            {
+                VerificarUser();
+            }
+            else if (string.IsNullOrEmpty(edtUser.Text.ToString()) || string.IsNullOrEmpty(edtPass.Text.ToString()))
+            {
+                AlertDialog.Builder alertDiag = new AlertDialog.Builder(this);
+                alertDiag.SetTitle("ERROR");
+                alertDiag.SetMessage("Los Campos de USER y PASSWORD no pueden estas vacios");
+                alertDiag.SetNegativeButton("OK", (senderAlert, args) => {
+                });
+                Dialog diag = alertDiag.Create();
+                diag.Show();
+            }
+
+        }
+
+        private async void VerificarUser()
+        {
+            EditText edtUser = FindViewById<EditText>(Resource.Id.edtUser);
+            EditText edtPass = FindViewById<EditText>(Resource.Id.edtPass);
+
+            mProgress = new ProgressDialog(this);
+            mProgress.SetCancelable(true);
+            mProgress.SetMessage("Verificando Usuario");
+            mProgress.SetProgressStyle(ProgressDialogStyle.Spinner);
+            mProgress.Progress = 0;
+            mProgress.Max = 100;
+
+            mProgress.Show();
+            try
+            {
+                string url = URLs.VerificarUser  + edtUser.Text.ToString() + URLs.VerificarUsery1 + edtPass.Text.ToString();
+                var GetUser = await url.GetRequestUSER<Usuario_Verificar>();
+
+                if (GetUser.ToString() == "USUARIO VERIFICADO")
+                {          
+                        StartActivity(typeof(Act_Main));
+                }
+                else
+                {
+                    mProgress.Dismiss();
+                    AlertDialog.Builder alertDiag = new AlertDialog.Builder(this);
+                    alertDiag.SetTitle("ERROR!");
+                    alertDiag.SetMessage("Usuario o Constraseña invalida");
+                    alertDiag.SetPositiveButton("OK", (senderAlert, args) =>
+                    {
+                        edtUser.Text = "";
+                        edtPass.Text = "";
+                    });
+                    Dialog diag = alertDiag.Create();
+                    diag.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                mProgress.Dismiss();
+                AlertDialog.Builder alertDiag = new AlertDialog.Builder(this);
+                alertDiag.SetTitle("ERROR");
+                alertDiag.SetMessage(ex.Message);
+                alertDiag.SetNegativeButton("OK", (senderAlert, args) =>
+                {
+
+                });
+                Dialog diag = alertDiag.Create();
+                diag.Show();
+
+            }
+
+        }
 
 
 

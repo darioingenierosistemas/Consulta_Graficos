@@ -27,6 +27,8 @@ namespace consulta_Ejecutiva.REST
         public static string LonUniMes1 = "http://testlab.g-gis.com:80/Rest_Ejecutivo/ejecutiva/consulta/LongitudUnidadSemana/?CodUnidadOperativa=";
         public static string LonUniMeses = "http://testlab.g-gis.com:80/Rest_Ejecutivo/ejecutiva/consulta/LongitudUnidadMeses/?CodUnidadOperativa=";
 
+        public static string VerificarUser = "http://testlab.g-gis.com:80/Rest_Ejecutivo/ejecutiva/consulta/Vaerificar_Usuario/?Usuario=";
+
         public static string ConMes1y1 = "&semanas=";
         public static string ConMesesy1 = "&meses=";
 
@@ -36,5 +38,6 @@ namespace consulta_Ejecutiva.REST
         public static string LonUniMes1y1 = "&semanas=";
         public static string LonUniMesesy1 = "&meses=";
 
+        public static string VerificarUsery1 = "&Password=";
     }
 }

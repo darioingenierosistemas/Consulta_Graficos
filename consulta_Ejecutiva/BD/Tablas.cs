@@ -4,6 +4,24 @@ using SQLite;
 namespace consulta_Ejecutiva.BD
 {
 
+    public class Usuario_Verificar
+    {
+
+        private string m_Respuesta;
+        public string Respuesta
+        {
+            get
+            {
+                return m_Respuesta;
+            }
+            set
+            {
+                this.m_Respuesta = value;
+            }
+        }
+
+    }
+
     [Table("TABLA_DEPARTAMENTOS")]
     public class TABLA_DEPARTAMENTOS
     {

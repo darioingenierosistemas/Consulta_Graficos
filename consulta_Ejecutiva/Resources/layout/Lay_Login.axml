@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	android:background="#3498DB">
+	android:background="#5499C7">
 	>
 
 	<ImageView 
@@ -46,6 +46,9 @@
 
 		<CheckBox 
 		 android:id="@+id/chkMostrar"
+		 android:textColor="@android:color/white"
+		 android:textStyle="bold"
+		 android:buttonTint="@color/colorPrimary"
 	     android:text="MOSTRAR CONTRASEÑA"
 		 android:layout_width="match_parent"
          android:layout_height="45dp"

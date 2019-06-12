@@ -178,7 +178,7 @@ namespace consulta_Ejecutiva.Actividades
             chart.PrimaryAxis.LabelsIntersectAction = AxisLabelsIntersectAction.MultipleRows;
 
             NumericalAxis secondaryAxis = new NumericalAxis();
-            secondaryAxis.Title.Text = "Longitud (mt)";
+            secondaryAxis.Title.Text = "Longitud(m)";
             chart.SecondaryAxis = secondaryAxis;
 
             LineSeries lineSeries = new LineSeries()

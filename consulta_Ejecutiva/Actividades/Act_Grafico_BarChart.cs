@@ -168,11 +168,6 @@ namespace consulta_Ejecutiva.Actividades
 			//seriesBar.DataMarker.ShowLabel = true;
 			seriesBar.TooltipEnabled = true;
 			
-			
-
-
-
-
 			ColumnSeries series = new ColumnSeries();
 			series.ItemsSource = Data3;
 			series.XBindingPath = "Name";
@@ -180,8 +175,6 @@ namespace consulta_Ejecutiva.Actividades
 			series.Label = "Longitud Patrullada";
 			series.TooltipEnabled = true;
 			
-			
-
 			// probando esto
 			chart.SideBySideSeriesPlacement = true;
 
@@ -192,7 +185,16 @@ namespace consulta_Ejecutiva.Actividades
 			SetContentView(chart);
 
 		}
-	}
+
+        public override void OnBackPressed()
+        {
+
+            var intent = new Intent(this, typeof(Act_Main));
+            StartActivity(intent);
+
+        }
+
+    }
 
 	public class ChartData
 	{

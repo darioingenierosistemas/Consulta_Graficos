@@ -445,6 +445,14 @@ namespace consulta_Ejecutiva.Actividades
          
         }
 
+        public override void OnBackPressed()
+        {
+
+            var intent = new Intent(this, typeof(Act_Login));
+            StartActivity(intent);
+
+        }
+
 
     }
 }

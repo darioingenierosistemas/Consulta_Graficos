@@ -16,6 +16,7 @@ namespace consulta_Ejecutiva
 {
     [Activity(Label = "CONSULTA EJECUTIVA", Theme = "@style/AppTheme"
         , MainLauncher = true
+        , Icon = "@mipmap/ic_launcher"
         )]
     public class Act_Login : AppCompatActivity
     {
@@ -131,6 +132,22 @@ namespace consulta_Ejecutiva
 
         }
 
+        public override void OnBackPressed()
+        {
+
+            Android.App.AlertDialog.Builder alertDiag = new Android.App.AlertDialog.Builder(this);
+            alertDiag.SetTitle("SALIR");
+            alertDiag.SetMessage("¿Desea cerrar la aplicación?");
+            alertDiag.SetNegativeButton("SI", (senderAlert, args) => {
+                FinishAffinity();
+            });
+            alertDiag.SetPositiveButton("NO", (senderAlert, args) => {
+
+            });
+            Dialog diag = alertDiag.Create();
+            diag.Show();
+
+        }
 
 
 

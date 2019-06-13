@@ -217,5 +217,14 @@ namespace consulta_Ejecutiva.Actividades
             public string Semanas { get; set; }
             public double LongPatrullada { get; set; }
         }
+
+        public override void OnBackPressed()
+        {
+
+            var intent = new Intent(this, typeof(Act_Main));
+            StartActivity(intent);
+
+        }
+
     }
 }
